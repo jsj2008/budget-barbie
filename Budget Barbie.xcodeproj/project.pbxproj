@@ -73,6 +73,7 @@
 		84CFDDEC14DCB88600A831FB /* AFURLConnectionOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 84CFDDE014DCB88600A831FB /* AFURLConnectionOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		84CFDDED14DCB88600A831FB /* AFXMLRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 84CFDDE214DCB88600A831FB /* AFXMLRequestOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		84CFDDEE14DCB88600A831FB /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 84CFDDE414DCB88600A831FB /* UIImageView+AFNetworking.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		84D95C1B14DEC307000D535D /* Place.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D95C1A14DEC307000D535D /* Place.m */; };
 		84E0653E14CEC39800B28270 /* present.png in Resources */ = {isa = PBXBuildFile; fileRef = 84E0653D14CEC39800B28270 /* present.png */; };
 		84E0654214CEC78F00B28270 /* GiveawayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E0654114CEC78F00B28270 /* GiveawayViewController.m */; };
 		84E0654514CECAB000B28270 /* present-nav.png in Resources */ = {isa = PBXBuildFile; fileRef = 84E0654314CECAB000B28270 /* present-nav.png */; };
@@ -200,6 +201,8 @@
 		84CFDDE214DCB88600A831FB /* AFXMLRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFXMLRequestOperation.m; sourceTree = "<group>"; };
 		84CFDDE314DCB88600A831FB /* UIImageView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+AFNetworking.h"; sourceTree = "<group>"; };
 		84CFDDE414DCB88600A831FB /* UIImageView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+AFNetworking.m"; sourceTree = "<group>"; };
+		84D95C1914DEC307000D535D /* Place.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Place.h; sourceTree = "<group>"; };
+		84D95C1A14DEC307000D535D /* Place.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Place.m; sourceTree = "<group>"; };
 		84E0653D14CEC39800B28270 /* present.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = present.png; sourceTree = "<group>"; };
 		84E0654014CEC78F00B28270 /* GiveawayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GiveawayViewController.h; sourceTree = "<group>"; };
 		84E0654114CEC78F00B28270 /* GiveawayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GiveawayViewController.m; sourceTree = "<group>"; };
@@ -404,6 +407,8 @@
 				84C5B79A14C9BF5100648B54 /* HomeViewController.m */,
 				848437F814CB163300C40A1B /* ListTableViewController.h */,
 				848437F914CB163300C40A1B /* ListTableViewController.m */,
+				84D95C1914DEC307000D535D /* Place.h */,
+				84D95C1A14DEC307000D535D /* Place.m */,
 				846BA9D614CC0390009704F2 /* DetailViewController.h */,
 				846BA9D714CC0390009704F2 /* DetailViewController.m */,
 				84C9FF6A14C91F6B0018FFA0 /* MainStoryboard.storyboard */,
@@ -634,6 +639,7 @@
 				84CFDDEC14DCB88600A831FB /* AFURLConnectionOperation.m in Sources */,
 				84CFDDED14DCB88600A831FB /* AFXMLRequestOperation.m in Sources */,
 				84CFDDEE14DCB88600A831FB /* UIImageView+AFNetworking.m in Sources */,
+				84D95C1B14DEC307000D535D /* Place.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

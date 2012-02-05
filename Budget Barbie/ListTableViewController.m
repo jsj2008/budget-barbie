@@ -7,38 +7,50 @@
 //
 
 #import "ListTableViewController.h"
-#import "AmazonClientManager.h"
 #import "UIImageView+WebCache.h"
 #import <QuartzCore/QuartzCore.h>
 #import "DetailViewController.h"
 #import "MBProgressHUD.h"
+#import "AFJSONRequestOperation.h"
+#import "Place.h"
 
 @implementation ListTableViewController
 {
-    NSMutableArray *items;
+    NSMutableArray *places;
 }
 
 @synthesize domainName = _domainName;
 
 #pragma mark - View lifecycle
 
-- (void)viewDidLoad
+-(void)fetchData
 {
-    [super viewDidLoad];
-
-    if (self.domainName == DOMAIN_NAME_FOR_PLACES) 
-        self.title = @"Places";
+    places = [[NSMutableArray alloc]init];
+    NSURL *url = [NSURL URLWithString:@"http://localhost/budget_barbie/get_places.php"];
+    NSURLRequest *request= [NSURLRequest requestWithURL:url];
     
-}
-
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
-    self.domainName = nil;
-}
-
--(void)fetchData:(NSString *)domain
-{
+    AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request
+                                                                                        success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+                                                                                            [JSON enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+                                                                                                Place *place = [[Place alloc]init];
+                                                                                                place.name = [obj objectForKey:@"itemName()"];
+                                                                                                place.description = [obj objectForKey:@"Description"];
+                                                                                                place.imageURL = [obj objectForKey:@"Image"];
+                                                                                                place.placeId = [obj objectForKey:@"id"];
+                                                                                                [places addObject:place];
+                                                                                            }];
+                                                                                            [self.tableView reloadData];
+                                                                                            [MBProgressHUD hideHUDForView:self.tableView animated:YES];
+                                                                                        }
+                                                                                        failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+                                                                                            NSLog(@"error:'%@'",error);
+                                                                                        }];
+    
+    operation.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
+    NSOperationQueue *queue = [[NSOperationQueue alloc]init];
+    [queue addOperation:operation];
+    
+    /*
     NSString *selectExpression = [NSString stringWithFormat:@"Select * From `%@` where itemName() is not null order by itemname()", domain];
     SimpleDBSelectRequest *selectRequest = [[SimpleDBSelectRequest alloc]initWithSelectExpression:selectExpression];
     
@@ -59,14 +71,28 @@
         });
     });
     dispatch_release(fetchQ);
+    */
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
+    hud.labelText = @"Loading...";
+    [self fetchData];
+    
+}
+
+- (void)viewDidUnload
+{
+    [super viewDidUnload];
+    self.domainName = nil;
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
-    hud.labelText = @"Loading...";
-    [self fetchData:self.domainName];
+
 }
 
 
@@ -79,7 +105,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [items count];
+    return [places count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -91,9 +117,9 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
-    SimpleDBItem *sdbItem = (SimpleDBItem *)[items objectAtIndex:indexPath.row];    
+    Place *place = [places objectAtIndex:indexPath.row]; 
     UILabel *nameLabel = (UILabel *)[cell viewWithTag:2];
-    nameLabel.text = sdbItem.name;
+    nameLabel.text = place.name;
 
     UIImageView *imageView = (UIImageView *)[cell viewWithTag:1];
     CALayer *imageLayer = [imageView layer];
@@ -102,11 +128,7 @@
     imageLayer.borderWidth = 2.0;
     imageLayer.borderColor = [UIColor blackColor].CGColor;
     
-    for (SimpleDBAttribute *attr in sdbItem.attributes) {
-        if ([attr.name isEqualToString:@"Image"]) {
-            [imageView setImageWithURL:[NSURL URLWithString:attr.value] placeholderImage:[UIImage imageNamed:@"Placeholder.png"]];
-        }
-    }
+    [imageView setImageWithURL:[NSURL URLWithString:place.imageURL] placeholderImage:[UIImage imageNamed:@"Placeholder.png"]];
     
     UIImageView *backgroundView = [[UIImageView alloc]initWithFrame:[cell frame]];
     [backgroundView setImage:[UIImage imageNamed:@"backgroundCell.png"]];
@@ -120,18 +142,15 @@
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqualToString:@"GetDetails"]) {
-        [segue.destinationViewController setItemSDB:sender];
+        [segue.destinationViewController setPlaceObject:sender];
     }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    SimpleDBItem *sdbItem = (SimpleDBItem *)[items objectAtIndex:indexPath.row];    
-    for (SimpleDBAttribute *attr in sdbItem.attributes) {
-        if ([attr.name isEqualToString:@"SubDomain"]) {
-            [self performSegueWithIdentifier:@"GetDetails" sender:sdbItem];
-        }
-    }
+    Place *place = [places objectAtIndex:indexPath.row];
+    [self performSegueWithIdentifier:@"GetDetails" sender:place];
+
 }
 
 @end

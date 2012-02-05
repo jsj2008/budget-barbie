@@ -10,4 +10,10 @@
 
 @implementation Place
 
+@synthesize placeId;
+@synthesize name;
+@synthesize imageURL;
+@synthesize description;
+
+
 @end

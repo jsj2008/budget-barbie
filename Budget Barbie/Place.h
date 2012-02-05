@@ -10,4 +10,9 @@
 
 @interface Place : NSObject
 
+@property (nonatomic, copy) NSString *placeId;
+@property (nonatomic, copy) NSString *name;
+@property (nonatomic, copy) NSString *imageURL;
+@property (nonatomic, copy) NSString *description;
+
 @end

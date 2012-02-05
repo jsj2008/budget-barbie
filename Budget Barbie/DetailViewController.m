@@ -23,7 +23,7 @@
 
 @synthesize subDomain = _subDomain;
 @synthesize itemsBought = _itemsBought;
-@synthesize itemSDB = _itemSDB;
+@synthesize placeObject = _placeObject;
 @synthesize tableView = _tableView;
 @synthesize loadMoreSelected = _loadMoreSelected;
 
@@ -31,6 +31,8 @@
 
 -(void)fetchShopsListing
 {
+    
+    /*
     for (SimpleDBAttribute *attr in self.itemSDB.attributes) {
         if ([attr.name isEqualToString:@"SubDomain"]) {
             self.subDomain = attr.value;
@@ -58,7 +60,7 @@
         });
     });
     dispatch_release(fetchQ);
-
+*/
 }
 
 -(void)loadPlaceImage:(UITableViewCell *)cell
@@ -70,21 +72,16 @@
     imageLayer.borderWidth = 1.5;
     imageLayer.borderColor = [UIColor blackColor].CGColor;
     
-    for (SimpleDBAttribute *attr in self.itemSDB.attributes) {
-        if ([attr.name isEqualToString:@"Image"]) {
-            [imageView setImageWithURL:[NSURL URLWithString:attr.value] placeholderImage:[UIImage imageNamed:@"Placeholder.png"]];
-        } else if ([attr.name isEqualToString:@"Description"]) {
-            UITextView *description = (UITextView *)[cell viewWithTag:8];
-            description.text = attr.value;
-        }
-    }
+    [imageView setImageWithURL:[NSURL URLWithString:self.placeObject.imageURL] placeholderImage:[UIImage imageNamed:@"Placeholder.png"]];
+    UITextView *description = (UITextView *)[cell viewWithTag:8];
+    description.text = self.placeObject.description;
+
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    self.title = self.itemSDB.name;
-    
+    self.title = self.placeObject.name;
     [self fetchShopsListing];
 }
 
