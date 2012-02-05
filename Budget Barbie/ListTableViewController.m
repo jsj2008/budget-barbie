@@ -12,7 +12,6 @@
 #import <QuartzCore/QuartzCore.h>
 #import "DetailViewController.h"
 #import "MBProgressHUD.h"
-#import "AFJSONRequestOperation.h"
 
 @implementation ListTableViewController
 {
