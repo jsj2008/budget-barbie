@@ -10,4 +10,7 @@
 
 @interface Winner : NSObject
 
+@property (nonatomic, copy) NSString *name;
+@property (nonatomic, copy) NSString *item;
+
 @end

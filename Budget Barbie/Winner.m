@@ -10,4 +10,6 @@
 
 @implementation Winner
 
+@synthesize name, item;
+
 @end

@@ -25,8 +25,8 @@
 
 -(void)fetchData
 {
-    places = [[NSMutableArray alloc]init];
-    NSURL *url = [NSURL URLWithString:@"http://localhost/budget_barbie/get_places.php"];
+    places = [[NSMutableArray alloc]initWithCapacity:10];
+    NSURL *url = [NSURL URLWithString:@"http://122.248.252.119/budget_barbie/get_places.php"];
     NSURLRequest *request= [NSURLRequest requestWithURL:url];
     
     AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request
@@ -46,7 +46,7 @@
                                                                                             NSLog(@"error:'%@'",error);
                                                                                         }];
     
-    operation.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
+    operation.acceptableContentTypes = [NSSet setWithObject:@"application/json"];
     NSOperationQueue *queue = [[NSOperationQueue alloc]init];
     [queue addOperation:operation];
     
@@ -77,6 +77,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [[self navigationItem]setTitleView:[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"titleView.png"]]];
+
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
     hud.labelText = @"Loading...";
     [self fetchData];

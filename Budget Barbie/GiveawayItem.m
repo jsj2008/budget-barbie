@@ -10,4 +10,6 @@
 
 @implementation GiveawayItem
 
+@synthesize item, imageURL;
+
 @end

@@ -10,4 +10,10 @@
 
 @implementation ItemBought
 
+@synthesize item;
+@synthesize shop;
+@synthesize image;
+@synthesize price;
+@synthesize location;
+
 @end

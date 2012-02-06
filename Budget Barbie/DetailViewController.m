@@ -9,20 +9,23 @@
 #import "DetailViewController.h"
 #import "UIImageView+WebCache.h"
 #import <QuartzCore/QuartzCore.h>
+#import "AFJSONRequestOperation.h"
+#import "ItemBought.h"
 
 @interface DetailViewController()
 
 @property (nonatomic, strong) NSString *subDomain;
-@property (nonatomic, strong) NSMutableArray *itemsBought;
 @property (nonatomic, assign) BOOL loadMoreSelected;
 
 @end
 
 
 @implementation DetailViewController
+{
+    NSMutableArray *itemsBought;
+}
 
 @synthesize subDomain = _subDomain;
-@synthesize itemsBought = _itemsBought;
 @synthesize placeObject = _placeObject;
 @synthesize tableView = _tableView;
 @synthesize loadMoreSelected = _loadMoreSelected;
@@ -31,6 +34,30 @@
 
 -(void)fetchShopsListing
 {
+    itemsBought = [[NSMutableArray alloc]initWithCapacity:10];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://122.248.252.119/budget_barbie/get_shops.php?id=%@",self.placeObject.placeId]];
+    NSURLRequest *request= [NSURLRequest requestWithURL:url];
+    
+    AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request 
+                                                                                        success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+                                                                                            [JSON enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+                                                                                                ItemBought *item = [[ItemBought alloc]init];
+                                                                                                item.shop = [obj objectForKey:@"Shop"];
+                                                                                                item.location = [obj objectForKey:@"Location"];
+                                                                                                item.price = [obj objectForKey:@"Price"];
+                                                                                                item.item = [obj objectForKey:@"itemName()"];
+                                                                                                item.image = [obj objectForKey:@"Image"];
+                                                                                                [itemsBought addObject:item];
+                                                                                            }];
+                                                                                            [self.tableView reloadData];
+                                                                                        } 
+                                                                                        failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+                                                                                            NSLog(@"error:'%@'",error);
+                                                                                        }];
+    operation.acceptableContentTypes = [NSSet setWithObject:@"application/json"];
+    NSOperationQueue *queue = [[NSOperationQueue alloc]init];
+    [queue addOperation:operation];
+    
     
     /*
     for (SimpleDBAttribute *attr in self.itemSDB.attributes) {
@@ -117,7 +144,7 @@
     if (!self.loadMoreSelected) {
         return 2;
     } else
-        return [self.itemsBought count]+2;
+        return [itemsBought count]+2;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -150,8 +177,8 @@
         
         //item name
         UILabel *itemLabel = (UILabel *)[cell viewWithTag:2];
-        SimpleDBItem *item = (SimpleDBItem *)[self.itemsBought objectAtIndex:indexPath.row-2];
-        itemLabel.text = item.name;
+        ItemBought *item = [itemsBought objectAtIndex:indexPath.row-2];
+        itemLabel.text = item.item;
         
         //item image
         UIImageView *imageView = (UIImageView *)[cell viewWithTag:1];
@@ -160,24 +187,17 @@
         imageLayer.cornerRadius = 15.0;
         imageLayer.borderWidth = 1.5;
         imageLayer.borderColor = [UIColor blackColor].CGColor;
-        
+        [imageView setImageWithURL:[NSURL URLWithString:item.image] placeholderImage:[UIImage imageNamed:@"Placeholder.png"]];
+
         //shop name
         UILabel *shopLabel = (UILabel *)[cell viewWithTag:3];
+        shopLabel.text = item.shop;
         //location
         UILabel *locationLabel = (UILabel *)[cell viewWithTag:4];
+        locationLabel.text = item.location;
         //price
         UILabel *priceLabel = (UILabel *)[cell viewWithTag:5];
-        
-        for (SimpleDBAttribute *attr in item.attributes) {
-            if ([attr.name isEqualToString:@"Image"])
-                [imageView setImageWithURL:[NSURL URLWithString:attr.value] placeholderImage:[UIImage imageNamed:@"Placeholder.png"]];
-            else if ([attr.name isEqualToString:@"Shop"])
-                shopLabel.text = attr.value;
-            else if ([attr.name isEqualToString:@"Location"])
-                locationLabel.text = attr.value;
-            else if ([attr.name isEqualToString:@"Price"])
-                priceLabel.text = [NSString stringWithFormat:@"$%@",attr.value];
-        }
+        priceLabel.text = [NSString stringWithFormat:@"$%@",item.price];
         
         UIImageView *backgroundView = [[UIImageView alloc]initWithFrame:[cell frame]];
         [backgroundView setImage:[UIImage imageNamed:@"detailTableCell.png"]];
@@ -197,7 +217,7 @@
         
         if (self.loadMoreSelected) {
             NSMutableArray *indexPaths = [NSMutableArray array];
-            for (int i=2; i<[self.itemsBought count]+2; i++) {
+            for (int i=2; i<[itemsBought count]+2; i++) {
                 [indexPaths addObject:[NSIndexPath indexPathForRow:i inSection:0]];
             }
             NSArray *insertIndexPaths = [NSArray arrayWithArray:indexPaths];
@@ -211,7 +231,7 @@
         else 
         {
             NSMutableArray *indexPaths = [NSMutableArray array];
-            for (int i=2; i<[self.itemsBought count]+2; i++) {
+            for (int i=2; i<[itemsBought count]+2; i++) {
                 [indexPaths addObject:[NSIndexPath indexPathForRow:i inSection:0]];
             }
             NSArray *deleteIndexPaths = [NSArray arrayWithArray:indexPaths];

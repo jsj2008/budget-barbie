@@ -11,6 +11,9 @@
 #import "MBProgressHUD.h"
 #import "UIImageView+WebCache.h"
 #import <QuartzCore/QuartzCore.h>
+#import "AFJSONRequestOperation.h"
+#import "Winner.h"
+#import "GiveawayItem.h"
 
 @interface GiveawayViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -20,7 +23,7 @@
 
 @implementation GiveawayViewController
 {
-    NSMutableArray *headerTitles;
+    NSMutableDictionary *headerTitles;
     NSMutableArray *giveawayItems;
     NSMutableArray *winnersList;
 }
@@ -46,6 +49,62 @@
 
 -(void)fetchData
 {
+    giveawayItems = [[NSMutableArray alloc]init];
+    winnersList = [[NSMutableArray alloc]init];
+    headerTitles = [[NSMutableDictionary alloc]init];
+
+    
+    NSURL *urlHeaders = [NSURL URLWithString:@"http://122.248.252.119/budget_barbie/giveaway_headers.php"];
+    NSURL *urlWinners = [NSURL URLWithString:@"http://122.248.252.119/budget_barbie/winners.php"];
+    NSURL *urlGiveaways = [NSURL URLWithString:@"http://122.248.252.119/budget_barbie/giveaway_items.php"];
+
+    //winners
+    NSURLRequest *request1 = [NSURLRequest requestWithURL:urlWinners];
+    AFJSONRequestOperation *operation1 = [AFJSONRequestOperation JSONRequestOperationWithRequest:request1 
+                                                                                         success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+                                                                                             [JSON enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+                                                                                                 Winner *winner = [[Winner alloc]init];
+                                                                                                 winner.name = [obj objectForKey:@"name"];
+                                                                                                 winner.item = [obj objectForKey:@"item"];
+                                                                                                 [winnersList addObject:winner];
+                                                                                             }];
+                                                                                             [self.tableView reloadData];
+                                                                                             [MBProgressHUD hideHUDForView:self.tableView animated:YES];
+                                                                                         } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+                                                                                             NSLog(@"error:'%@'",error);
+                                                                                         }];
+    //giveaways
+    NSURLRequest *request2 = [NSURLRequest requestWithURL:urlGiveaways];
+    AFJSONRequestOperation *operation2 = [AFJSONRequestOperation JSONRequestOperationWithRequest:request2 
+                                                                                         success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+                                                                                             [JSON enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+                                                                                                 GiveawayItem *giveawayItem = [[GiveawayItem alloc]init];
+                                                                                                 giveawayItem.item = [obj objectForKey:@"item"];
+                                                                                                 giveawayItem.imageURL = [obj objectForKey:@"image"];
+                                                                                                 [giveawayItems addObject:giveawayItem];
+                                                                                             }];
+                                                                                             [self.tableView reloadData];
+                                                                                             [MBProgressHUD hideHUDForView:self.tableView animated:YES];
+                                                                                         } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+                                                                                             NSLog(@"error:'%@'",error);
+                                                                                         }];
+    //headers
+    NSURLRequest *request3 = [NSURLRequest requestWithURL:urlHeaders];
+    AFJSONRequestOperation *operation3 = [AFJSONRequestOperation JSONRequestOperationWithRequest:request3 
+                                                                                         success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+                                                                                             headerTitles = JSON;
+                                                                                             NSLog(@"dictionary:'%@'",headerTitles);
+                                                                                             [self.tableView reloadData];
+                                                                                             [MBProgressHUD hideHUDForView:self.tableView animated:YES];
+                                                                                         } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+                                                                                             NSLog(@"error:'%@'",error);
+                                                                                         }];
+    
+    NSMutableArray *array = [NSMutableArray arrayWithObjects:operation1,operation2,operation3,nil];
+    NSOperationQueue *queue = [[NSOperationQueue alloc]init];
+    [queue addOperations:array waitUntilFinished:YES];
+    
+    /*
     NSString *selectExpression = [NSString stringWithFormat:@"Select * From `%@` where itemName() is not null order by itemname()", GiveawayHeaderDomain];
     SimpleDBSelectRequest *selectRequest = [[SimpleDBSelectRequest alloc]initWithSelectExpression:selectExpression];
     
@@ -85,11 +144,11 @@
             [winnersList addObject:sdbItem];
         
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self.tableView reloadData];
-            [MBProgressHUD hideHUDForView:self.tableView animated:YES];
+
         });
     });
     dispatch_release(fetchQ);
+     */
 }
 
 - (void)viewDidLoad
@@ -141,17 +200,10 @@
     titleLabel.backgroundColor = [UIColor clearColor];
     titleLabel.font = labelFont;
     
-    if (section == 0) {
-        SimpleDBItem *item = (SimpleDBItem *)[headerTitles objectAtIndex:0];
-        SimpleDBAttribute *attr = (SimpleDBAttribute *)[item.attributes objectAtIndex:0];
-        titleLabel.text = attr.value;
-    }
+    if (section == 0) 
+        titleLabel.text = [headerTitles objectForKey:@"giveaway"];
     else
-    {
-        SimpleDBItem *item = (SimpleDBItem *)[headerTitles objectAtIndex:1];
-        SimpleDBAttribute *attr = (SimpleDBAttribute *)[item.attributes objectAtIndex:0];
-        titleLabel.text = attr.value;
-    }
+        titleLabel.text = [headerTitles objectForKey:@"winners"];
     
     [customSectionHeaderView addSubview:titleLabel];
     
@@ -219,15 +271,13 @@
             imageLayer.borderWidth = 1.5;
             imageLayer.borderColor = [UIColor blackColor].CGColor;
             
-            SimpleDBItem *item = (SimpleDBItem *)[giveawayItems objectAtIndex:indexPath.row];
-            SimpleDBAttribute *attr = (SimpleDBAttribute *)[item.attributes objectAtIndex:0];
-            [giftImageView setImageWithURL:[NSURL URLWithString:attr.value] placeholderImage:[UIImage imageNamed:@"Placeholder.png"]];
+            GiveawayItem *item = [giveawayItems objectAtIndex:indexPath.row];
+            [giftImageView setImageWithURL:[NSURL URLWithString:item.imageURL] placeholderImage:[UIImage imageNamed:@"Placeholder.png"]];
             
             //name
             UILabel *itemName = (UILabel *)[cell viewWithTag:2];
-            itemName.text = item.name;
+            itemName.text = item.item;
             
-        
             cell.backgroundView = [self customiseCellBackground:cell cellForRowAtIndexPath:indexPath];
             return cell;
         }
@@ -245,11 +295,9 @@
         UILabel *winnerName = (UILabel *)[cell viewWithTag:3];
         UILabel *winnerItem = (UILabel *)[cell viewWithTag:4];
 
-        SimpleDBItem *item = (SimpleDBItem *)[winnersList objectAtIndex:indexPath.row];
-        SimpleDBAttribute *attr = (SimpleDBAttribute *)[item.attributes objectAtIndex:0];
-
-        winnerName.text = item.name;
-        winnerItem.text = attr.value;
+        Winner *winner = [winnersList objectAtIndex:indexPath.row];
+        winnerName.text = winner.name;
+        winnerItem.text = winner.item;
         
         cell.backgroundView = [self customiseCellBackground:cell cellForRowAtIndexPath:indexPath];
         

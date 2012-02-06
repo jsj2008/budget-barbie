@@ -20,6 +20,7 @@
 		8438021C14CA60CC00F54BBC /* button_back_textured_30.png in Resources */ = {isa = PBXBuildFile; fileRef = 8438021814CA60CC00F54BBC /* button_back_textured_30.png */; };
 		8438021D14CA60CC00F54BBC /* button_textured_24.png in Resources */ = {isa = PBXBuildFile; fileRef = 8438021914CA60CC00F54BBC /* button_textured_24.png */; };
 		8438021E14CA60CC00F54BBC /* button_textured_30.png in Resources */ = {isa = PBXBuildFile; fileRef = 8438021A14CA60CC00F54BBC /* button_textured_30.png */; };
+		8438CCB514DFDEBE00594332 /* ItemBought.m in Sources */ = {isa = PBXBuildFile; fileRef = 8438CCB414DFDEBD00594332 /* ItemBought.m */; };
 		8458F3EA14CA93BF00C5D2A0 /* bluebutton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8458F3E714CA93BF00C5D2A0 /* bluebutton@2x.png */; };
 		8458F3EB14CA93BF00C5D2A0 /* greenbutton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8458F3E814CA93BF00C5D2A0 /* greenbutton@2x.png */; };
 		8458F3EC14CA93BF00C5D2A0 /* redbutton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8458F3E914CA93BF00C5D2A0 /* redbutton@2x.png */; };
@@ -78,6 +79,8 @@
 		84E0654214CEC78F00B28270 /* GiveawayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E0654114CEC78F00B28270 /* GiveawayViewController.m */; };
 		84E0654514CECAB000B28270 /* present-nav.png in Resources */ = {isa = PBXBuildFile; fileRef = 84E0654314CECAB000B28270 /* present-nav.png */; };
 		84E0654614CECAB000B28270 /* present-nav@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84E0654414CECAB000B28270 /* present-nav@2x.png */; };
+		84EE42AA14E029F000F18806 /* Winner.m in Sources */ = {isa = PBXBuildFile; fileRef = 84EE42A914E029F000F18806 /* Winner.m */; };
+		84EE42AE14E02B0A00F18806 /* GiveawayItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 84EE42AD14E02B0A00F18806 /* GiveawayItem.m */; };
 		84F33A0C14CA45CC00293981 /* AmazonClientManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F33A0914CA45CC00293981 /* AmazonClientManager.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		84F33A0D14CA45CC00293981 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F33A0B14CA45CC00293981 /* Constants.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		84F33A2714CA45F500293981 /* AmazonKeyChainWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F33A1014CA45F500293981 /* AmazonKeyChainWrapper.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -116,6 +119,8 @@
 		8438021814CA60CC00F54BBC /* button_back_textured_30.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_back_textured_30.png; sourceTree = "<group>"; };
 		8438021914CA60CC00F54BBC /* button_textured_24.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_textured_24.png; sourceTree = "<group>"; };
 		8438021A14CA60CC00F54BBC /* button_textured_30.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_textured_30.png; sourceTree = "<group>"; };
+		8438CCB314DFDEBD00594332 /* ItemBought.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemBought.h; sourceTree = "<group>"; };
+		8438CCB414DFDEBD00594332 /* ItemBought.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemBought.m; sourceTree = "<group>"; };
 		8458F3E714CA93BF00C5D2A0 /* bluebutton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bluebutton@2x.png"; sourceTree = "<group>"; };
 		8458F3E814CA93BF00C5D2A0 /* greenbutton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "greenbutton@2x.png"; sourceTree = "<group>"; };
 		8458F3E914CA93BF00C5D2A0 /* redbutton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "redbutton@2x.png"; sourceTree = "<group>"; };
@@ -208,6 +213,10 @@
 		84E0654114CEC78F00B28270 /* GiveawayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GiveawayViewController.m; sourceTree = "<group>"; };
 		84E0654314CECAB000B28270 /* present-nav.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "present-nav.png"; sourceTree = "<group>"; };
 		84E0654414CECAB000B28270 /* present-nav@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "present-nav@2x.png"; sourceTree = "<group>"; };
+		84EE42A814E029F000F18806 /* Winner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Winner.h; sourceTree = "<group>"; };
+		84EE42A914E029F000F18806 /* Winner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Winner.m; sourceTree = "<group>"; };
+		84EE42AC14E02B0A00F18806 /* GiveawayItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GiveawayItem.h; sourceTree = "<group>"; };
+		84EE42AD14E02B0A00F18806 /* GiveawayItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GiveawayItem.m; sourceTree = "<group>"; };
 		84F33A0814CA45CC00293981 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		84F33A0914CA45CC00293981 /* AmazonClientManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AmazonClientManager.m; sourceTree = "<group>"; };
 		84F33A0A14CA45CC00293981 /* AmazonClientManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmazonClientManager.h; sourceTree = "<group>"; };
@@ -411,9 +420,15 @@
 				84D95C1A14DEC307000D535D /* Place.m */,
 				846BA9D614CC0390009704F2 /* DetailViewController.h */,
 				846BA9D714CC0390009704F2 /* DetailViewController.m */,
+				8438CCB314DFDEBD00594332 /* ItemBought.h */,
+				8438CCB414DFDEBD00594332 /* ItemBought.m */,
 				84C9FF6A14C91F6B0018FFA0 /* MainStoryboard.storyboard */,
 				84E0654014CEC78F00B28270 /* GiveawayViewController.h */,
 				84E0654114CEC78F00B28270 /* GiveawayViewController.m */,
+				84EE42AC14E02B0A00F18806 /* GiveawayItem.h */,
+				84EE42AD14E02B0A00F18806 /* GiveawayItem.m */,
+				84EE42A814E029F000F18806 /* Winner.h */,
+				84EE42A914E029F000F18806 /* Winner.m */,
 				84C5B78114C9919000648B54 /* WebViewController.h */,
 				84C5B78214C9919000648B54 /* WebViewController.m */,
 				842510C314C92D0C007CE27F /* StartUpViewController.h */,
@@ -640,6 +655,9 @@
 				84CFDDED14DCB88600A831FB /* AFXMLRequestOperation.m in Sources */,
 				84CFDDEE14DCB88600A831FB /* UIImageView+AFNetworking.m in Sources */,
 				84D95C1B14DEC307000D535D /* Place.m in Sources */,
+				8438CCB514DFDEBE00594332 /* ItemBought.m in Sources */,
+				84EE42AA14E029F000F18806 /* Winner.m in Sources */,
+				84EE42AE14E02B0A00F18806 /* GiveawayItem.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -10,4 +10,11 @@
 
 @interface ItemBought : NSObject
 
+@property (nonatomic, copy) NSString *image;
+@property (nonatomic, copy) NSString *location;
+@property (nonatomic, copy) NSString *price;
+@property (nonatomic, copy) NSString *shop;
+@property (nonatomic, copy) NSString *item;
+
+
 @end

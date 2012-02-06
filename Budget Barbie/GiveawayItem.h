@@ -10,4 +10,7 @@
 
 @interface GiveawayItem : NSObject
 
+@property (nonatomic, copy) NSString *item;
+@property (nonatomic, copy) NSString *imageURL;
+
 @end
