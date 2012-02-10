@@ -8,50 +8,58 @@
 
 #import "WebViewController.h"
 #import "MBProgressHUD.h"
+#import "AFJSONRequestOperation.h"
+#import "MyConstants.h"
 
 
 @implementation WebViewController
 {
     MBProgressHUD *hud;
-
+    NSString *webUrlString;
 }
 
 @synthesize webView = _webView;
-@synthesize webAttribute = _webAttribute;
+@synthesize urlString = _urlString;
 @synthesize backButton = _backButton;
 @synthesize forwardButton = _forwardButton;
 @synthesize refreshButton = _refreshButton;
 @synthesize closeButton = _closeButton;
 
--(NSString *)getUrlString
+-(void)getUrlString
 {
-    NSString *string = nil;
-    SimpleDBGetAttributesRequest *attributesRequest = [[SimpleDBGetAttributesRequest alloc]initWithDomainName:HomeScreenDomainName andItemName:HomeScreenItemName];
-    SimpleDBGetAttributesResponse *response = [[AmazonClientManager sdb] getAttributes:attributesRequest];
-    for (SimpleDBAttribute *attr in response.attributes) {
-        if ([attr.name isEqualToString:@"Webview"]) {
-            string = attr.value;
-            }
-       }
-    return string;
+    
+    NSString *urlString = [NSString stringWithFormat:@"%@%@%@",kHostName,kHostMainDirectory,kHostPathForSplashScreen];
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:urlString]];
+    
+    AFJSONRequestOperation *operation = [AFJSONRequestOperation 
+                                         JSONRequestOperationWithRequest:request 
+                                         success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+                                             webUrlString = [JSON objectForKey:@"webview"];
+                                             NSURLRequest *requestVideo = [NSURLRequest requestWithURL:[NSURL URLWithString:webUrlString]];
+                                             self.webView.delegate = self;
+                                             [self.webView loadRequest:requestVideo];
+                                         } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+                                             NSLog(@"error:%@",error);
+                                         }];
+    NSOperationQueue *queue = [[NSOperationQueue alloc]init];
+    [queue addOperation:operation];
+
 }
 
 -(void) loadWebRequest
 {
     hud = [MBProgressHUD showHUDAddedTo:self.webView animated:YES];
     hud.labelText = @"Please Wait...";
-    NSString *urlString = nil;
-    if (self.webAttribute.value) {
-        urlString = self.webAttribute.value;
-    }
-    else
-    {
-        urlString = [self getUrlString];
-    }
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:urlString]];
-    self.webView.delegate = self;
     
-    [self.webView loadRequest:request];
+    if (self.urlString) {
+        NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:self.urlString]];
+        self.webView.delegate = self;
+        [self.webView loadRequest:request];
+    }
+    else 
+    {
+        [self getUrlString];
+    }
 }
 
 
@@ -68,9 +76,9 @@
     [self setForwardButton:nil];
     [self setRefreshButton:nil];
     [self setCloseButton:nil];
+    [self setUrlString:nil];
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
+
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -81,7 +89,7 @@
 
 - (IBAction)backButtonPressed:(id)sender 
 {
-    if (self.webAttribute.value) {
+    if (self.urlString) {
         [self dismissViewControllerAnimated:YES completion:nil];
     } else
         [self.navigationController popViewControllerAnimated:YES];
@@ -100,10 +108,8 @@
 {
     [hud hide:YES];
     
-    // Make sure there's an actual error, and the error is not -999 (JS-induced, or WebKit bug)
-    if (error != NULL && ([error code] != NSURLErrorCancelled)) {
-		// NSLog(@"Error: %@", error);
-		
+    if (error != NULL && ([error code] != NSURLErrorCancelled))
+    {
 		if ([error code] != NSURLErrorCancelled) {
 			//show error alert, etc.
 		}

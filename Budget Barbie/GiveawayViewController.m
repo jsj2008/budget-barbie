@@ -7,13 +7,13 @@
 //
 
 #import "GiveawayViewController.h"
-#import "AmazonClientManager.h"
 #import "MBProgressHUD.h"
 #import "UIImageView+WebCache.h"
 #import <QuartzCore/QuartzCore.h>
 #import "AFJSONRequestOperation.h"
 #import "Winner.h"
 #import "GiveawayItem.h"
+#import "MyConstants.h"
 
 @interface GiveawayViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -54,9 +54,9 @@
     headerTitles = [[NSMutableDictionary alloc]init];
 
     
-    NSURL *urlHeaders = [NSURL URLWithString:@"http://122.248.252.119/budget_barbie/giveaway_headers.php"];
-    NSURL *urlWinners = [NSURL URLWithString:@"http://122.248.252.119/budget_barbie/winners.php"];
-    NSURL *urlGiveaways = [NSURL URLWithString:@"http://122.248.252.119/budget_barbie/giveaway_items.php"];
+    NSURL *urlHeaders = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@",kHostName,kHostMainDirectory,kHostPathForGiveawayHeaders]];
+    NSURL *urlWinners = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@",kHostName,kHostMainDirectory,kHostPathForGiveawayWinners]];
+    NSURL *urlGiveaways = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@",kHostName,kHostMainDirectory,kHostPathForGiveawayItems]];
 
     //winners
     NSURLRequest *request1 = [NSURLRequest requestWithURL:urlWinners];
@@ -93,7 +93,6 @@
     AFJSONRequestOperation *operation3 = [AFJSONRequestOperation JSONRequestOperationWithRequest:request3 
                                                                                          success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
                                                                                              headerTitles = JSON;
-                                                                                             NSLog(@"dictionary:'%@'",headerTitles);
                                                                                              [self.tableView reloadData];
                                                                                              [MBProgressHUD hideHUDForView:self.tableView animated:YES];
                                                                                          } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
@@ -102,53 +101,8 @@
     
     NSMutableArray *array = [NSMutableArray arrayWithObjects:operation1,operation2,operation3,nil];
     NSOperationQueue *queue = [[NSOperationQueue alloc]init];
-    [queue addOperations:array waitUntilFinished:YES];
-    
-    /*
-    NSString *selectExpression = [NSString stringWithFormat:@"Select * From `%@` where itemName() is not null order by itemname()", GiveawayHeaderDomain];
-    SimpleDBSelectRequest *selectRequest = [[SimpleDBSelectRequest alloc]initWithSelectExpression:selectExpression];
-    
-    NSString *selectGiveAwayExpression = [NSString stringWithFormat:@"Select * From `%@` where itemName() is not null order by itemname()", GiveawayGiftsDomain];
-    SimpleDBSelectRequest *selectGiveAwayRequest = [[SimpleDBSelectRequest alloc]initWithSelectExpression:selectGiveAwayExpression];
-    
-    NSString *selectWinnersExpression = [NSString stringWithFormat:@"Select * From `%@` where itemName() is not null order by itemname()", GiveawayWinnersDomain];
-    SimpleDBSelectRequest *selectWinnersRequest = [[SimpleDBSelectRequest alloc]initWithSelectExpression:selectWinnersExpression];
-    
-    dispatch_queue_t fetchQ = dispatch_queue_create("Fetcher", NULL);
-    dispatch_async(fetchQ, ^{
-        // titles
-        SimpleDBSelectResponse *selectResponse = [[AmazonClientManager sdb]select:selectRequest];
-        if (headerTitles == nil) {
-            headerTitles = [[NSMutableArray alloc]initWithCapacity:[selectResponse.items count]];
-        } else
-            [headerTitles removeAllObjects];
-        for (SimpleDBItem *sdbItem in selectResponse.items)
-            [headerTitles addObject:sdbItem];
-        
-        //giveaways
-        SimpleDBSelectResponse *selectGiveAwayResponse = [[AmazonClientManager sdb]select:selectGiveAwayRequest];
-        if (giveawayItems == nil) {
-            giveawayItems = [[NSMutableArray alloc]initWithCapacity:[selectGiveAwayResponse.items count]];
-        } else
-            [giveawayItems removeAllObjects];
-        for (SimpleDBItem *sdbItem in selectGiveAwayResponse.items)
-            [giveawayItems addObject:sdbItem];
-        
-        //winners
-        SimpleDBSelectResponse *selectWinnersResponse = [[AmazonClientManager sdb]select:selectWinnersRequest];
-        if (winnersList == nil) {
-            winnersList = [[NSMutableArray alloc]initWithCapacity:[selectWinnersResponse.items count]];
-        } else
-            [winnersList removeAllObjects];
-        for (SimpleDBItem *sdbItem in selectWinnersResponse.items)
-            [winnersList addObject:sdbItem];
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
+    [queue addOperations:array waitUntilFinished:NO];
 
-        });
-    });
-    dispatch_release(fetchQ);
-     */
 }
 
 - (void)viewDidLoad

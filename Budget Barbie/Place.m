@@ -14,6 +14,6 @@
 @synthesize name;
 @synthesize imageURL;
 @synthesize description;
-
+@synthesize likes;
 
 @end

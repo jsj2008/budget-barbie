@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "AmazonClientManager.h"
 #import "Place.h"
 
 @interface DetailViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>

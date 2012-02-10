@@ -10,7 +10,10 @@
 #import "UIImageView+WebCache.h"
 #import <QuartzCore/QuartzCore.h>
 #import "AFJSONRequestOperation.h"
+#import "MBProgressHUD.h"
+#import "MyConstants.h"
 #import "ItemBought.h"
+#import "ImageDetailViewController.h"
 
 @interface DetailViewController()
 
@@ -35,7 +38,7 @@
 -(void)fetchShopsListing
 {
     itemsBought = [[NSMutableArray alloc]initWithCapacity:10];
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://122.248.252.119/budget_barbie/get_shops.php?id=%@",self.placeObject.placeId]];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@?id=%@",kHostName,kHostMainDirectory,kHostPathForGetShops,self.placeObject.placeId]];
     NSURLRequest *request= [NSURLRequest requestWithURL:url];
     
     AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request 
@@ -49,12 +52,13 @@
                                                                                                 item.image = [obj objectForKey:@"Image"];
                                                                                                 [itemsBought addObject:item];
                                                                                             }];
+                                                                                            [MBProgressHUD hideHUDForView:self.view animated:YES];
                                                                                             [self.tableView reloadData];
                                                                                         } 
                                                                                         failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+                                                                                            [MBProgressHUD hideHUDForView:self.view animated:YES];
                                                                                             NSLog(@"error:'%@'",error);
                                                                                         }];
-    operation.acceptableContentTypes = [NSSet setWithObject:@"application/json"];
     NSOperationQueue *queue = [[NSOperationQueue alloc]init];
     [queue addOperation:operation];
     
@@ -96,8 +100,8 @@
     CALayer *imageLayer = [imageView layer];
     imageLayer.masksToBounds = YES;
     imageLayer.cornerRadius = 10.0;
-    imageLayer.borderWidth = 1.5;
-    imageLayer.borderColor = [UIColor blackColor].CGColor;
+    imageLayer.borderWidth = 1.0;
+    imageLayer.borderColor = [UIColor grayColor].CGColor;
     
     [imageView setImageWithURL:[NSURL URLWithString:self.placeObject.imageURL] placeholderImage:[UIImage imageNamed:@"Placeholder.png"]];
     UITextView *description = (UITextView *)[cell viewWithTag:8];
@@ -109,6 +113,8 @@
 {
     [super viewWillAppear:animated];
     self.title = self.placeObject.name;
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.labelText = @"Loading now...";
     [self fetchShopsListing];
 }
 
@@ -132,7 +138,7 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.row == 0)
-        return 211.0;
+        return 150.0;
     else if (indexPath.row == 1)
         return 44.0;
     else
@@ -182,11 +188,6 @@
         
         //item image
         UIImageView *imageView = (UIImageView *)[cell viewWithTag:1];
-        CALayer *imageLayer = [imageView layer];
-        imageLayer.masksToBounds = YES;
-        imageLayer.cornerRadius = 15.0;
-        imageLayer.borderWidth = 1.5;
-        imageLayer.borderColor = [UIColor blackColor].CGColor;
         [imageView setImageWithURL:[NSURL URLWithString:item.image] placeholderImage:[UIImage imageNamed:@"Placeholder.png"]];
 
         //shop name
@@ -209,37 +210,35 @@
 
 #pragma mark TableView Delegate
 
+
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.row == 1) {
-        
         self.loadMoreSelected = !self.loadMoreSelected;
-        
         if (self.loadMoreSelected) {
-            NSMutableArray *indexPaths = [NSMutableArray array];
-            for (int i=2; i<[itemsBought count]+2; i++) {
-                [indexPaths addObject:[NSIndexPath indexPathForRow:i inSection:0]];
-            }
-            NSArray *insertIndexPaths = [NSArray arrayWithArray:indexPaths];
-                                         
-            
-            [tableView beginUpdates];
-            [tableView insertRowsAtIndexPaths:insertIndexPaths withRowAnimation:UITableViewRowAnimationLeft];
-            [tableView endUpdates];
-            
-        } 
+            MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+            hud.labelText = @"Loading now...";
+            [self.tableView reloadData];
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
+        }
         else 
         {
             NSMutableArray *indexPaths = [NSMutableArray array];
-            for (int i=2; i<[itemsBought count]+2; i++) {
+            for (int i=2; i<[itemsBought count]+2; i++) 
                 [indexPaths addObject:[NSIndexPath indexPathForRow:i inSection:0]];
-            }
+            
             NSArray *deleteIndexPaths = [NSArray arrayWithArray:indexPaths];
         
             [tableView beginUpdates];
-            [tableView deleteRowsAtIndexPaths:deleteIndexPaths withRowAnimation:UITableViewRowAnimationLeft];
+            [tableView deleteRowsAtIndexPaths:deleteIndexPaths withRowAnimation:UITableViewRowAnimationFade];
             [tableView endUpdates];
         }
+    } 
+    else if (indexPath.row >= 2) {
+        ItemBought *item = [itemsBought objectAtIndex:indexPath.row-2];    
+        ImageDetailViewController *controller = [[ImageDetailViewController alloc] initWithNibName:@"ImageDetailViewController" bundle:nil];
+        controller.itemBought = item;
+        [controller presentInParentViewController:self];
     }
 }
 

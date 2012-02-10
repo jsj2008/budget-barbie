@@ -6,7 +6,6 @@
 //  Copyright (c) 2012 Cellcity. All rights reserved.
 //
 
-#import "AmazonClientManager.h"
 #import "MBProgressHUD.h"
 #import "CustomTitleViewController.h"
 #import <UIKit/UIKit.h>
@@ -14,7 +13,7 @@
 @interface WebViewController : CustomTitleViewController <UIWebViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
-@property (strong, nonatomic) SimpleDBAttribute *webAttribute;
+@property (strong, nonatomic) NSString *urlString;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *backButton;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *forwardButton;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *refreshButton;

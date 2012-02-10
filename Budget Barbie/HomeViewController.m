@@ -31,29 +31,8 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-
-    [self.budgetButton moveTo:CGPointMake(-32.0, 31.0) duration:ANIMATE_DURATION delay:0.0 option:UIViewAnimationCurveLinear];
-    [self.specialButton moveTo:CGPointMake(108, 123) duration:ANIMATE_DURATION delay:0.0 option:UIViewAnimationCurveLinear];
-    [self.videoButton moveTo:CGPointMake(-32.0, 213.0) duration:ANIMATE_DURATION delay:0.0 option:UIViewAnimationCurveLinear];
-    [self.giveawayButton moveTo:CGPointMake(108, 305) duration:ANIMATE_DURATION delay:0.0 option:UIViewAnimationCurveLinear];
-    [self.presentImage moveTo:CGPointMake(120, 319) duration:ANIMATE_DURATION delay:0.0 option:UIViewAnimationCurveLinear];
 }
 
-
--(void)viewWillDisappear:(BOOL)animated
-{
-    [self.budgetButton.layer removeAllAnimations];
-    [self.specialButton.layer removeAllAnimations];
-    [self.videoButton.layer removeAllAnimations];
-    [self.giveawayButton.layer removeAllAnimations];
-}
-
--(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    if ([segue.identifier isEqualToString:@"GetPlaces"]) {
-        [segue.destinationViewController setDomainName:DOMAIN_NAME_FOR_PLACES];
-    }
-}
 
 - (void)loadSoundEffect
 {
