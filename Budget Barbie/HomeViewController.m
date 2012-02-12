@@ -85,16 +85,7 @@
     [super viewDidUnload];
 }
 
-- (IBAction)specialPressed 
-{
-    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Under Construction" 
-                                                   message:@"Content is currently unavailable."
-                                                  delegate:self
-                                         cancelButtonTitle:@"OK" 
-                                         otherButtonTitles: nil];
-    
-    [alert show];
-}
+
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {

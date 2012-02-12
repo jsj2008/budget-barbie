@@ -19,9 +19,12 @@
     SystemSoundID soundID;
 }
 
+
 @synthesize descriptionLabel = _descriptionLabel;
 @synthesize webButton = _webButton;
 @synthesize staticWeekUpdateImage = _staticWeekUpdateImage;
+
+dispatch_queue_t queue;
 
 - (void)loadSoundEffect
 {
@@ -92,8 +95,6 @@
                                          }];
     NSOperationQueue *queue = [[NSOperationQueue alloc]init];
     [queue addOperation:operation];
-    
-
 }
 
 - (IBAction)enterClicked:(id)sender 
@@ -104,11 +105,14 @@
 -(void)viewDidLoad
 {
     [super viewDidLoad];
+    queue = dispatch_queue_create("com.localhost.queue",nil);
+
     [self loadSoundEffect];
     self.staticWeekUpdateImage.alpha = 0.0;
 
-    
-    [self fetchSplashScreenInfo];
+    dispatch_async(queue, ^{
+        [self fetchSplashScreenInfo];
+    });
 }
 
 
@@ -119,4 +123,10 @@
     [self setStaticWeekUpdateImage:nil];
     [super viewDidUnload];
 }
+
+-(void)dealloc
+{
+    dispatch_release(queue);
+}
+
 @end

@@ -18,5 +18,7 @@ NSString * const kHostPathForGetShops = @"get_shops.php";
 NSString * const kHostPathForGiveawayHeaders = @"giveaway_headers.php";
 NSString * const kHostPathForGiveawayItems = @"giveaway_items.php";
 NSString * const kHostPathForGiveawayWinners = @"winners.php";
+NSString * const kHostPathForSpecialMain = @"special_main.php";
+NSString * const kHostPathForSpecialDetails = @"special_details.php";
 
 @end

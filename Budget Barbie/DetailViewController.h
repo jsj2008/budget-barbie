@@ -7,11 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Place.h"
+
+@class Place;
+@class SpecialItem;
 
 @interface DetailViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) Place *placeObject;
+@property (nonatomic, strong) SpecialItem *specialItem;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @end

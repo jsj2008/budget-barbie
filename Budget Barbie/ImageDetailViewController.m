@@ -10,6 +10,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "GradientView.h"
 #import "UIImageView+WebCache.h"
+#import "ItemBought.h"
 
 
 @interface ImageDetailViewController()
@@ -39,6 +40,7 @@
 -(void) updateUI
 {
     self.itemName.text = self.itemBought.item;
+    self.itemName.layer.cornerRadius = 10.0f;
 	[self.imageView setImageWithURL:[NSURL URLWithString:self.itemBought.image] placeholderImage:[UIImage imageNamed:@"DetailPlaceholder"]];
     
 }

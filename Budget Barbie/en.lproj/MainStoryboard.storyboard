@@ -138,7 +138,7 @@
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="Homepage(2nd).png" id="FC2-Na-5jk">
+                            <imageView userInteractionEnabled="NO" contentMode="center" image="Homepage(2nd).png" id="FC2-Na-5jk">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
@@ -154,7 +154,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="specialPressed" destination="v87-6X-Awb" eventType="touchUpInside" id="0Pi-bK-th2"/>
+                                    <segue destination="knr-Xi-mxY" kind="push" id="HtW-K7-ZQs"/>
                                 </connections>
                             </button>
                             <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="2pe-vJ-hd3">
@@ -203,7 +203,7 @@
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="present.png" id="F3C-V5-oyi">
-                                <rect key="frame" x="330" y="319" width="52" height="53"/>
+                                <rect key="frame" x="114" y="319" width="52" height="53"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                             </imageView>
                         </subviews>
@@ -221,6 +221,46 @@
             </objects>
             <point key="canvasLocation" x="1539" y="157"/>
         </scene>
+        <scene sceneID="dcC-9T-o4I">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zcM-vQ-kPp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="knr-Xi-mxY" customClass="SpecialHomeViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="N8w-fP-Elz">
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="Homepage(2nd).png" id="T3k-1A-YbJ">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                            </imageView>
+                            <view contentMode="scaleToFill" id="HAb-zV-JIy" customClass="iCarousel">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="Special-logo.png" id="0BZ-KY-8ub">
+                                        <rect key="frame" x="151" y="7" width="192" height="69"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="knr-Xi-mxY" id="O0M-55-pX8"/>
+                                    <outlet property="delegate" destination="knr-Xi-mxY" id="klF-fZ-FE1"/>
+                                </connections>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="or8-S2-Mgk"/>
+                    <connections>
+                        <outlet property="carousel" destination="HAb-zV-JIy" id="sg3-cn-Dq0"/>
+                        <outlet property="view" destination="N8w-fP-Elz" id="oth-Ax-wQ0"/>
+                        <segue destination="cU2-eX-K7F" kind="push" identifier="SpecialDetails" id="bPw-k8-rZC"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="1985" y="773"/>
+        </scene>
         <scene sceneID="kAK-tB-BTA">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zk3-pp-iOw" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -229,7 +269,7 @@
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="Homepage(2nd).png" id="887-Lz-bZ7">
+                            <imageView userInteractionEnabled="NO" contentMode="center" image="Homepage(2nd).png" id="887-Lz-bZ7">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
@@ -328,7 +368,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="1985" y="740"/>
+            <point key="canvasLocation" x="1529" y="1420"/>
         </scene>
         <scene sceneID="vFU-kI-WTc">
             <objects>
@@ -338,7 +378,7 @@
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="Homepage(2nd).png" id="dmn-cY-3Lg">
+                            <imageView userInteractionEnabled="NO" contentMode="center" image="Homepage(2nd).png" id="dmn-cY-3Lg">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
@@ -347,26 +387,25 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ImageCell" rowHeight="150" id="cbP-Ti-D1P">
-                                        <rect key="frame" x="0.0" y="22" width="320" height="150"/>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ImageCell" rowHeight="135" id="cbP-Ti-D1P">
+                                        <rect key="frame" x="0.0" y="22" width="320" height="135"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="149"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="134"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" tag="6" contentMode="scaleAspectFill" id="gwE-BR-XOQ">
-                                                    <rect key="frame" x="180" y="20" width="120" height="77"/>
+                                                <imageView userInteractionEnabled="NO" tag="6" contentMode="scaleAspectFit" id="gwE-BR-XOQ">
+                                                    <rect key="frame" x="174" y="9" width="133" height="115"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="titleView.png" id="L5g-yb-xeK">
-                                                    <rect key="frame" x="236" y="92" width="84" height="44"/>
+                                                    <rect key="frame" x="264" y="90" width="84" height="44"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
-                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" tag="8" contentMode="scaleToFill" editable="NO" id="8Cj-Hx-4ug">
-                                                    <rect key="frame" x="10" y="10" width="170" height="131"/>
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" tag="8" contentMode="scaleToFill" editable="NO" text="testing" id="8Cj-Hx-4ug">
+                                                    <rect key="frame" x="10" y="10" width="156" height="107"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                    <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                 </textView>
@@ -375,7 +414,7 @@
                                         </view>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="LoadMoreCell" rowHeight="44" id="TPT-N8-FEv">
-                                        <rect key="frame" x="0.0" y="172" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="157" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
@@ -400,7 +439,7 @@
                                         </view>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ItemBoughtCell" rowHeight="82" id="AAR-A5-gIL">
-                                        <rect key="frame" x="0.0" y="216" width="320" height="82"/>
+                                        <rect key="frame" x="0.0" y="201" width="320" height="82"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="81"/>
@@ -473,7 +512,7 @@
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="67" sectionHeaderHeight="22" sectionFooterHeight="22" id="DcZ-yN-8Jf">
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="0.59999999999999998" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" rowHeight="67" id="0zo-aM-UAG">
                                 <rect key="frame" x="0.0" y="22" width="320" height="67"/>
@@ -495,14 +534,14 @@
                                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
                                         </button>
-                                        <imageView userInteractionEnabled="NO" tag="1001" contentMode="scaleAspectFill" id="gOe-2L-5Lh">
-                                            <rect key="frame" x="3" y="2" width="91" height="61"/>
+                                        <imageView userInteractionEnabled="NO" tag="1001" contentMode="scaleAspectFit" id="gOe-2L-5Lh">
+                                            <rect key="frame" x="3" y="2" width="126" height="61"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         </imageView>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1002" contentMode="left" text="Label" lineBreakMode="tailTruncation" numberOfLines="2" adjustsFontSizeToFit="NO" minimumFontSize="10" id="czZ-f0-yfD">
-                                            <rect key="frame" x="102" y="4" width="192" height="37"/>
+                                            <rect key="frame" x="139" y="4" width="176" height="37"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" name="AmericanTypewriter-Bold" family="American Typewriter" pointSize="16"/>
+                                            <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="15"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -562,6 +601,7 @@
     <resources>
         <image name="Homepage(2nd).png" width="640" height="960"/>
         <image name="Homepage_bg.png" width="640" height="960"/>
+        <image name="Special-logo.png" width="300" height="109"/>
         <image name="ThisWeekUpdate.png" width="209" height="136"/>
         <image name="back-arrow.png" width="13" height="15"/>
         <image name="bluebutton.png" width="306" height="88"/>
@@ -606,6 +646,12 @@
         <class className="ListTableViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ListTableViewController.h"/>
         </class>
+        <class className="SpecialHomeViewController" superclassName="CustomTitleViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/SpecialHomeViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="carousel" candidateClass="iCarousel"/>
+            </relationships>
+        </class>
         <class className="StartUpViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/StartUpViewController.h"/>
             <relationships>
@@ -624,6 +670,13 @@
                 <relationship kind="outlet" name="webView" candidateClass="UIWebView"/>
             </relationships>
         </class>
+        <class className="iCarousel" superclassName="UIView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/iCarousel.h"/>
+            <relationships>
+                <relationship kind="outlet" name="dataSource"/>
+                <relationship kind="outlet" name="delegate"/>
+            </relationships>
+        </class>
     </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
@@ -631,6 +684,7 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="TtE-gg-1AE"/>
+        <segue reference="bPw-k8-rZC"/>
+        <segue reference="SSk-p9-MwK"/>
     </inferredMetricsTieBreakers>
 </document>

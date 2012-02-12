@@ -7,7 +7,10 @@
 //
 
 #import "CustomTitleViewController.h"
+#import "iCarousel.h"
 
-@interface SpecialHomeViewController : CustomTitleViewController
+@interface SpecialHomeViewController : CustomTitleViewController <iCarouselDelegate, iCarouselDataSource>
+
+@property (nonatomic, weak) IBOutlet iCarousel *carousel;
 
 @end

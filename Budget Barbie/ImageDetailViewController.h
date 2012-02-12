@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ItemBought.h"
+@class ItemBought;
 
 typedef enum {
 	ImageDetailViewControllerAnimationTypeSlide,

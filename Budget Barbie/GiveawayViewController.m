@@ -196,7 +196,6 @@
 {
     NSInteger sectionRows = [self.tableView numberOfRowsInSection:[indexPath section]];
     UIImageView *backgroundView = [[UIImageView alloc]initWithFrame:[cell frame]];
-
     if (indexPath.row == 0)
         [backgroundView setImage:[UIImage imageNamed:@"giveawayCell.png"]];
     else if (indexPath.row == sectionRows-1)

@@ -27,7 +27,6 @@
 #pragma mark - View lifecycle
 
 
-
 -(void)fetchData
 {
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
@@ -164,12 +163,12 @@
     
 
     UIImageView *imageView = (UIImageView *)[cell viewWithTag:1001];
-    CALayer *imageLayer = [imageView layer];
+  /*  CALayer *imageLayer = [imageView layer];
     imageLayer.masksToBounds = YES;
     imageLayer.cornerRadius = 10.0;
     imageLayer.borderWidth = 0.5;
     imageLayer.borderColor = [UIColor grayColor].CGColor;
-    
+   */ 
     [imageView setImageWithURL:[NSURL URLWithString:place.imageURL] placeholderImage:[UIImage imageNamed:@"Placeholder.png"]];
     
     UIImageView *backgroundView = [[UIImageView alloc]initWithFrame:[cell frame]];

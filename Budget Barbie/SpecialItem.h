@@ -10,4 +10,9 @@
 
 @interface SpecialItem : NSObject
 
+@property (nonatomic, copy) NSString *specialID;
+@property (nonatomic, copy) NSString *description;
+@property (nonatomic, copy) NSString *title;
+@property (nonatomic, copy) NSString *imageURL;
+
 @end

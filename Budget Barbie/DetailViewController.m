@@ -8,16 +8,16 @@
 
 #import "DetailViewController.h"
 #import "UIImageView+WebCache.h"
-#import <QuartzCore/QuartzCore.h>
 #import "AFJSONRequestOperation.h"
 #import "MBProgressHUD.h"
+#import "Place.h"
 #import "MyConstants.h"
 #import "ItemBought.h"
 #import "ImageDetailViewController.h"
+#import "SpecialItem.h"
 
 @interface DetailViewController()
 
-@property (nonatomic, strong) NSString *subDomain;
 @property (nonatomic, assign) BOOL loadMoreSelected;
 
 @end
@@ -28,16 +28,16 @@
     NSMutableArray *itemsBought;
 }
 
-@synthesize subDomain = _subDomain;
 @synthesize placeObject = _placeObject;
 @synthesize tableView = _tableView;
 @synthesize loadMoreSelected = _loadMoreSelected;
+@synthesize specialItem = _specialItem;
 
 #pragma mark - View lifecycle
 
 -(void)fetchShopsListing
 {
-    itemsBought = [[NSMutableArray alloc]initWithCapacity:10];
+    itemsBought = [NSMutableArray new];
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@?id=%@",kHostName,kHostMainDirectory,kHostPathForGetShops,self.placeObject.placeId]];
     NSURLRequest *request= [NSURLRequest requestWithURL:url];
     
@@ -61,61 +61,68 @@
                                                                                         }];
     NSOperationQueue *queue = [[NSOperationQueue alloc]init];
     [queue addOperation:operation];
+}
+
+-(void)fetchSpecialListing
+{
+    itemsBought = [NSMutableArray new];
+    NSString *urlString = [NSString stringWithFormat:@"%@%@%@?id=%@",kHostName,kHostMainDirectory,kHostPathForSpecialDetails,self.specialItem.specialID];
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:urlString]];
     
-    
-    /*
-    for (SimpleDBAttribute *attr in self.itemSDB.attributes) {
-        if ([attr.name isEqualToString:@"SubDomain"]) {
-            self.subDomain = attr.value;
-        }
-    }
-    
-    dispatch_queue_t fetchQ = dispatch_queue_create("SubDomain", NULL);
-    dispatch_async(fetchQ, ^{
-        NSString *selectExpression = [NSString stringWithFormat:@"Select * from `%@` where Shop is not null order by Shop",self.subDomain];
-        SimpleDBSelectRequest *selectRequest = [[SimpleDBSelectRequest alloc]initWithSelectExpression:selectExpression];
-        
-        SimpleDBSelectResponse *selectResponse = [[AmazonClientManager sdb]select:selectRequest];
-        if (self.itemsBought == nil) {
-            self.itemsBought = [[NSMutableArray alloc]initWithCapacity:[selectResponse.items count]];
-        } else
-            [self.itemsBought removeAllObjects];
-        
-        for (SimpleDBItem *sdbItem in selectResponse.items) {
-            [self.itemsBought addObject:sdbItem];
-        }
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.tableView reloadData];
-            if ([self.itemsBought count] <= 3) self.tableView.scrollEnabled = NO; 
-        });
-    });
-    dispatch_release(fetchQ);
-*/
+    AFJSONRequestOperation *operation = [AFJSONRequestOperation
+                                         JSONRequestOperationWithRequest:request
+                                         success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+                                             [JSON enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+                                                 ItemBought *item = [[ItemBought alloc]init];
+                                                 item.shop = [obj objectForKey:@"Shop"];
+                                                 item.location = [obj objectForKey:@"Location"];
+                                                 item.price = [obj objectForKey:@"Price"];
+                                                 item.item = [obj objectForKey:@"itemName()"];
+                                                 item.image = [obj objectForKey:@"Image"];
+                                                 [itemsBought addObject:item];
+                                             }];
+                                             [MBProgressHUD hideHUDForView:self.view animated:YES];
+                                             [self.tableView reloadData];
+                                         } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+                                             [MBProgressHUD hideHUDForView:self.view animated:YES];
+                                             NSLog(@"error:'%@'",error);
+                                         }];
+    NSOperationQueue *queue = [[NSOperationQueue alloc]init];
+    [queue addOperation:operation];
 }
 
 -(void)loadPlaceImage:(UITableViewCell *)cell
 {
     UIImageView *imageView = (UIImageView *)[cell viewWithTag:6];
-    CALayer *imageLayer = [imageView layer];
+  /*  CALayer *imageLayer = [imageView layer];
     imageLayer.masksToBounds = YES;
     imageLayer.cornerRadius = 10.0;
     imageLayer.borderWidth = 1.0;
     imageLayer.borderColor = [UIColor grayColor].CGColor;
-    
-    [imageView setImageWithURL:[NSURL URLWithString:self.placeObject.imageURL] placeholderImage:[UIImage imageNamed:@"Placeholder.png"]];
-    UITextView *description = (UITextView *)[cell viewWithTag:8];
-    description.text = self.placeObject.description;
-
+    */
+    if (self.placeObject) {
+        [imageView setImageWithURL:[NSURL URLWithString:self.placeObject.imageURL] placeholderImage:[UIImage imageNamed:@"Placeholder.png"]];
+        UITextView *description = (UITextView *)[cell viewWithTag:8];
+        description.text = self.placeObject.description;
+    } else {
+        [imageView setImageWithURL:[NSURL URLWithString:self.specialItem.imageURL] placeholderImage:[UIImage imageNamed:@"Placeholder.png"]];
+        UITextView *description = (UITextView *)[cell viewWithTag:8];
+        description.text = self.specialItem.description;
+    }
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    self.title = self.placeObject.name;
+    if (self.placeObject) {
+        self.title = self.placeObject.name;
+        [self fetchShopsListing];
+    } else {
+        self.title = self.specialItem.title;
+        [self fetchSpecialListing];
+    }
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.labelText = @"Loading now...";
-    [self fetchShopsListing];
 }
 
 
@@ -138,7 +145,7 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.row == 0)
-        return 150.0;
+        return 135.0;
     else if (indexPath.row == 1)
         return 44.0;
     else
@@ -162,8 +169,6 @@
     if (indexPath.row == 0) {
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier1];
         [self loadPlaceImage:cell];
-        
-        
         
         return cell;
         
@@ -209,7 +214,6 @@
 }
 
 #pragma mark TableView Delegate
-
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {

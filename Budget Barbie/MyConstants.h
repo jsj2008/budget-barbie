@@ -18,5 +18,7 @@ extern NSString * const kHostPathForGetShops;
 extern NSString * const kHostPathForGiveawayHeaders;
 extern NSString * const kHostPathForGiveawayItems;
 extern NSString * const kHostPathForGiveawayWinners;
+extern NSString * const kHostPathForSpecialMain;
+extern NSString * const kHostPathForSpecialDetails;
 
 @end

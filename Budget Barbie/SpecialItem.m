@@ -10,4 +10,9 @@
 
 @implementation SpecialItem
 
+@synthesize title;
+@synthesize description;
+@synthesize imageURL;
+@synthesize specialID;
+
 @end
