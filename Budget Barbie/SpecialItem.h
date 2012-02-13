@@ -14,5 +14,6 @@
 @property (nonatomic, copy) NSString *description;
 @property (nonatomic, copy) NSString *title;
 @property (nonatomic, copy) NSString *imageURL;
+@property (nonatomic, copy) NSString *videoURL;
 
 @end

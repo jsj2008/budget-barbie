@@ -15,6 +15,7 @@
 #import "ItemBought.h"
 #import "ImageDetailViewController.h"
 #import "SpecialItem.h"
+#import "YouTubeView.h"
 
 @interface DetailViewController()
 
@@ -25,6 +26,7 @@
 
 @implementation DetailViewController
 {
+    BOOL loaded;
     NSMutableArray *itemsBought;
 }
 
@@ -32,6 +34,7 @@
 @synthesize tableView = _tableView;
 @synthesize loadMoreSelected = _loadMoreSelected;
 @synthesize specialItem = _specialItem;
+@synthesize youtubeView = _youtubeView;
 
 #pragma mark - View lifecycle
 
@@ -93,19 +96,19 @@
 
 -(void)loadPlaceImage:(UITableViewCell *)cell
 {
-    UIImageView *imageView = (UIImageView *)[cell viewWithTag:6];
-  /*  CALayer *imageLayer = [imageView layer];
-    imageLayer.masksToBounds = YES;
-    imageLayer.cornerRadius = 10.0;
-    imageLayer.borderWidth = 1.0;
-    imageLayer.borderColor = [UIColor grayColor].CGColor;
-    */
+
     if (self.placeObject) {
-        [imageView setImageWithURL:[NSURL URLWithString:self.placeObject.imageURL] placeholderImage:[UIImage imageNamed:@"Placeholder.png"]];
+        NSString *videoURL = self.placeObject.videoURL;
+        self.youtubeView = [[YouTubeView alloc]initWithStringAsURL:videoURL frame:CGRectMake(180, 10, 128, 107)];
+        [cell addSubview:self.youtubeView];
+        
         UITextView *description = (UITextView *)[cell viewWithTag:8];
         description.text = self.placeObject.description;
     } else {
-        [imageView setImageWithURL:[NSURL URLWithString:self.specialItem.imageURL] placeholderImage:[UIImage imageNamed:@"Placeholder.png"]];
+        NSString *videoURL = self.specialItem.videoURL;
+        self.youtubeView = [[YouTubeView alloc]initWithStringAsURL:videoURL frame:CGRectMake(180, 10, 128, 107)];
+        [cell addSubview:self.youtubeView];
+
         UITextView *description = (UITextView *)[cell viewWithTag:8];
         description.text = self.specialItem.description;
     }
@@ -114,6 +117,7 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+        
     if (self.placeObject) {
         self.title = self.placeObject.name;
         [self fetchShopsListing];
@@ -130,13 +134,11 @@
 {
     [self setTableView:nil];
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
+
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    // Return YES for supported orientations
     return YES;
 }
 
@@ -167,11 +169,16 @@
     static NSString *CellIdentifier2 = @"LoadMoreCell";
 
     if (indexPath.row == 0) {
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier1];
-        [self loadPlaceImage:cell];
-        
-        return cell;
-        
+        if (!loaded) {
+            loaded = YES;
+            UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier1];
+            [self loadPlaceImage:cell];
+            return cell;
+        }
+        else {
+            UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier1];
+            return cell;
+        }
     } 
     else if (indexPath.row == 1) 
     {

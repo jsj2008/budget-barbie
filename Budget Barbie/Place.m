@@ -15,5 +15,6 @@
 @synthesize imageURL;
 @synthesize description;
 @synthesize likes;
+@synthesize videoURL;
 
 @end

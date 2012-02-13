@@ -14,5 +14,6 @@
 @synthesize description;
 @synthesize imageURL;
 @synthesize specialID;
+@synthesize videoURL;
 
 @end

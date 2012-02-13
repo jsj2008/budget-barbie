@@ -41,6 +41,7 @@
                                                  item.imageURL = [obj objectForKey:@"image"];
                                                  item.title = [obj objectForKey:@"title"];
                                                  item.description = [obj objectForKey:@"description"];
+                                                 item.videoURL = [obj objectForKey:@"video"];
                                                  [items addObject:item];
                                              }];
                                              [MBProgressHUD hideHUDForView:self.view animated:YES];

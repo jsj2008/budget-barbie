@@ -45,6 +45,7 @@
                                                  place.imageURL = [obj objectForKey:@"Image"];
                                                  place.placeId = [obj objectForKey:@"id"];
                                                  place.likes = [obj objectForKey:@"likes"];
+                                                 place.videoURL = [obj objectForKey:@"Video"];
                                                  [places addObject:place];
                                              }];
                                              [self.tableView reloadData];

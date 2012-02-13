@@ -394,14 +394,6 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="134"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" tag="6" contentMode="scaleAspectFit" id="gwE-BR-XOQ">
-                                                    <rect key="frame" x="174" y="9" width="133" height="115"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                                </imageView>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="titleView.png" id="L5g-yb-xeK">
-                                                    <rect key="frame" x="264" y="90" width="84" height="44"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                                                </imageView>
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" tag="8" contentMode="scaleToFill" editable="NO" text="testing" id="8Cj-Hx-4ug">
                                                     <rect key="frame" x="10" y="10" width="156" height="107"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
@@ -614,7 +606,6 @@
         <image name="greenbutton.png" width="306" height="88"/>
         <image name="present.png" width="297" height="307"/>
         <image name="redbutton.png" width="306" height="88"/>
-        <image name="titleView.png" width="84" height="44"/>
         <image name="yellowbutton.png" width="306" height="88"/>
     </resources>
     <classes>
