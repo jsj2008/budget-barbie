@@ -24,7 +24,6 @@
 @synthesize webButton = _webButton;
 @synthesize staticWeekUpdateImage = _staticWeekUpdateImage;
 
-dispatch_queue_t queue;
 
 - (void)loadSoundEffect
 {
@@ -64,6 +63,25 @@ dispatch_queue_t queue;
     }
 }
 
+-(void)loadImage:(NSString *)imageURL
+{
+    dispatch_queue_t queue = dispatch_queue_create("queue", NULL);
+    dispatch_async(queue, ^{
+        UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:imageURL]]];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.webButton setBackgroundImage:image forState:UIControlStateNormal];
+            self.staticWeekUpdateImage.transform = CGAffineTransformScale(self.staticWeekUpdateImage.transform, 0.1, 0.1);
+            [UIView animateWithDuration:0.7 animations:^{
+                self.staticWeekUpdateImage.alpha = 1.0;
+                self.staticWeekUpdateImage.transform = CGAffineTransformScale(self.staticWeekUpdateImage.transform, 10.0, 10.0);
+                [MBProgressHUD hideHUDForView:self.webButton animated:YES];
+            }];
+        });
+    });
+
+    dispatch_release(queue);
+}
+
 -(void)fetchSplashScreenInfo
 {
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.webButton animated:YES];
@@ -73,30 +91,20 @@ dispatch_queue_t queue;
     NSString *urlString = [NSString stringWithFormat:@"%@%@%@",kHostName,kHostMainDirectory,kHostPathForSplashScreen];
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:urlString]];
     
-    dispatch_async(queue, ^{
-        AFJSONRequestOperation *operation = [AFJSONRequestOperation 
+    AFJSONRequestOperation *operation = [AFJSONRequestOperation 
                                              JSONRequestOperationWithRequest:request 
                                              success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
                                                  webUrlstring = [JSON objectForKey:@"webview"];
                                                  self.descriptionLabel.text = [JSON objectForKey:@"description"];
-                                                 UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[JSON objectForKey:@"image"]]]];
-                                                 [self.webButton setBackgroundImage:image forState:UIControlStateNormal];
-                                                 
-                                                 self.staticWeekUpdateImage.transform = CGAffineTransformScale(self.staticWeekUpdateImage.transform, 0.1, 0.1);
-                                                 [UIView animateWithDuration:0.7 animations:^{
-                                                     self.staticWeekUpdateImage.alpha = 1.0;
-                                                     self.staticWeekUpdateImage.transform = CGAffineTransformScale(self.staticWeekUpdateImage.transform, 10.0, 10.0);
-                                                     [MBProgressHUD hideHUDForView:self.webButton animated:YES];
-                                                     
-                                                 }];
+                                                 NSString *imageURL = [JSON objectForKey:@"image"];
+                                                 [self loadImage:imageURL];
                                              } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
                                                  NSLog(@"error:%@",error);
                                                  [MBProgressHUD hideHUDForView:self.webButton animated:YES];
                                                  
                                              }];
-        NSOperationQueue *queue = [[NSOperationQueue alloc]init];
-        [queue addOperation:operation];
-    });
+    NSOperationQueue *queue = [[NSOperationQueue alloc]init];
+    [queue addOperation:operation];
 
 }
 
@@ -111,8 +119,7 @@ dispatch_queue_t queue;
     [self loadSoundEffect];
     self.staticWeekUpdateImage.alpha = 0.0;
 
-    queue = dispatch_queue_create("com.localhost.queue",nil);
-        [self fetchSplashScreenInfo];
+    [self fetchSplashScreenInfo];
 }
 
 
@@ -124,9 +131,5 @@ dispatch_queue_t queue;
     [super viewDidUnload];
 }
 
--(void)dealloc
-{
-    dispatch_release(queue);
-}
 
 @end

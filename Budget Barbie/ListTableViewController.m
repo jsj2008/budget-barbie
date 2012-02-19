@@ -22,10 +22,9 @@
     NSMutableArray *places;
 }
 
-@synthesize domainName = _domainName;
+@synthesize tableView = _tableView;
 
 #pragma mark - View lifecycle
-
 
 -(void)fetchData
 {
@@ -71,7 +70,7 @@
 
 -(void)likeRequest:(int)placeId
 {
-	NSString *deviceUDID = [[UIDevice currentDevice]uniqueDeviceIdentifier];
+	NSString *deviceUDID = [[UIDevice currentDevice] uniqueGlobalDeviceIdentifier];
     NSString *placeIdString = [NSString stringWithFormat:@"%d",placeId];
     
     NSURL *url = [NSURL URLWithString:@"http://122.248.252.119/"];
@@ -111,16 +110,13 @@
 {
     [super viewDidLoad];
     [[self navigationItem]setTitleView:[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"titleView.png"]]];
-
-
     [self fetchData];
-    
 }
 
 - (void)viewDidUnload
 {
     [super viewDidUnload];
-    self.domainName = nil;
+    self.tableView = nil;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -164,12 +160,7 @@
     
 
     UIImageView *imageView = (UIImageView *)[cell viewWithTag:1001];
-  /*  CALayer *imageLayer = [imageView layer];
-    imageLayer.masksToBounds = YES;
-    imageLayer.cornerRadius = 10.0;
-    imageLayer.borderWidth = 0.5;
-    imageLayer.borderColor = [UIColor grayColor].CGColor;
-   */ 
+
     [imageView setImageWithURL:[NSURL URLWithString:place.imageURL] placeholderImage:[UIImage imageNamed:@"Placeholder.png"]];
     
     UIImageView *backgroundView = [[UIImageView alloc]initWithFrame:[cell frame]];

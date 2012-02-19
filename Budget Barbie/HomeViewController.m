@@ -68,9 +68,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
     [self loadSoundEffect];
     [self performSelector:@selector(playSoundEffect) withObject:nil afterDelay:0.6];
+
 }
 
 
@@ -86,12 +86,5 @@
 }
 
 
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    // Return YES for supported orientations
-
-    return YES;
-}
 
 @end

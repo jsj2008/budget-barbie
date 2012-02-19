@@ -9,8 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "CustomTitleViewController.h"
 
-@interface ListTableViewController : UITableViewController
+@interface ListTableViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
-@property (nonatomic, strong) NSString *domainName;
+@property (nonatomic, weak) IBOutlet UITableView *tableView;
 
 @end

@@ -21,7 +21,7 @@
 
 @synthesize carousel = _carousel;
 
-#pragma mark - View lifecycle
+#pragma mark - View lifecycle}
 
 -(void) setUp
 {

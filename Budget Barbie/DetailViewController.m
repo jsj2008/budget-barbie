@@ -101,13 +101,18 @@
         NSString *videoURL = self.placeObject.videoURL;
         self.youtubeView = [[YouTubeView alloc]initWithStringAsURL:videoURL frame:CGRectMake(180, 10, 128, 107)];
         [cell addSubview:self.youtubeView];
+        self.youtubeView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleBottomMargin;
+
         
         UITextView *description = (UITextView *)[cell viewWithTag:8];
         description.text = self.placeObject.description;
     } else {
         NSString *videoURL = self.specialItem.videoURL;
         self.youtubeView = [[YouTubeView alloc]initWithStringAsURL:videoURL frame:CGRectMake(180, 10, 128, 107)];
+
         [cell addSubview:self.youtubeView];
+        self.youtubeView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleBottomMargin;
+
 
         UITextView *description = (UITextView *)[cell viewWithTag:8];
         description.text = self.specialItem.description;
@@ -249,7 +254,7 @@
         ItemBought *item = [itemsBought objectAtIndex:indexPath.row-2];    
         ImageDetailViewController *controller = [[ImageDetailViewController alloc] initWithNibName:@"ImageDetailViewController" bundle:nil];
         controller.itemBought = item;
-        [controller presentInParentViewController:self];
+        if (!controller.isViewLoaded && !controller.view.window) [controller presentInParentViewController:self];
     }
 }
 

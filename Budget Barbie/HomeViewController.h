@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "CustomTitleViewController.h"
 
-@interface HomeViewController : CustomTitleViewController
+@interface HomeViewController : CustomTitleViewController 
 
 @property (weak, nonatomic) IBOutlet UIButton *budgetButton;
 @property (weak, nonatomic) IBOutlet UIButton *specialButton;
