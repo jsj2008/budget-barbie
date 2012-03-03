@@ -89,10 +89,9 @@
 
 - (IBAction)backButtonPressed:(id)sender 
 {
-    if (self.urlString) {
-        [self dismissViewControllerAnimated:YES completion:nil];
-    } else
-        [self.navigationController popViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
+     
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark UIWebView Delegate

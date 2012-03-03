@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "CustomTitleViewController.h"
 
-@interface ListTableViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
+@interface ListTableViewController : CustomTitleViewController <UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
 

@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.0" toolsVersion="1938" systemVersion="11D50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="QT7-un-fqY">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.1" toolsVersion="2427" systemVersion="12A128p" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="QT7-un-fqY">
     <dependencies>
         <development defaultVersion="4200" identifier="xcode"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="933"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1420"/>
     </dependencies>
     <scenes>
+        <!--Start Up View Controller-->
         <scene sceneID="vaY-Qj-eB1">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pc2-5w-YrI" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -13,64 +14,74 @@
                         <rect key="frame" x="0.0" y="20" width="320" height="460"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="Homepage_bg.png" id="6zN-fL-h2e">
+                            <view contentMode="scaleToFill" id="5mo-ow-6f8">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="0Ye-0B-LNf">
-                                <rect key="frame" x="106" y="403" width="108" height="55"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" image="enterButton.png">
-                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="enterClicked:" destination="QT7-un-fqY" eventType="touchUpInside" id="Q80-Gs-3Rf"/>
-                                    <segue destination="neM-wE-5Q8" kind="custom" customClass="CIDoorwaySegue" id="F26-rj-t8I"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="" lineBreakMode="tailTruncation" numberOfLines="2" minimumFontSize="10" id="hCc-ZC-Ozc">
-                                <rect key="frame" x="25" y="367" width="275" height="34"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="13"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="gCe-kG-9wo">
-                                <rect key="frame" x="20" y="196" width="280" height="163"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal">
-                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <segue destination="RPI-Mb-bxT" kind="modal" identifier="PushWebView" modalTransitionStyle="crossDissolve" id="ieU-1m-uws"/>
-                                </connections>
-                            </button>
-                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="ThisWeekUpdate.png" id="Fdn-cK-9Z7">
-                                <rect key="frame" x="0.0" y="164" width="92" height="59"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                            </imageView>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="Homepage_bg.png" id="6zN-fL-h2e">
+                                        <rect key="frame" x="0.0" y="-24" width="320" height="484"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="0Ye-0B-LNf">
+                                        <rect key="frame" x="106" y="359" width="108" height="55"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                        <state key="normal" image="enterButton.png">
+                                            <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="enterClicked:" destination="QT7-un-fqY" eventType="touchUpInside" id="Q80-Gs-3Rf"/>
+                                            <segue destination="neM-wE-5Q8" kind="custom" identifier="CustomSegue" customClass="CIDoorwaySegue" id="F26-rj-t8I"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="" lineBreakMode="tailTruncation" numberOfLines="2" minimumFontSize="9" id="hCc-ZC-Ozc">
+                                        <rect key="frame" x="23" y="326" width="275" height="34"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="gCe-kG-9wo">
+                                        <rect key="frame" x="20" y="155" width="280" height="163"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                        <state key="normal">
+                                            <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <segue destination="RPI-Mb-bxT" kind="modal" identifier="PushWebView" modalTransitionStyle="crossDissolve" id="ieU-1m-uws"/>
+                                        </connections>
+                                    </button>
+                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="ThisWeekUpdate.png" id="Fdn-cK-9Z7">
+                                        <rect key="frame" x="0.0" y="143" width="92" height="59"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <connections>
+                        <outlet property="contentView" destination="5mo-ow-6f8" id="fXi-9h-BVQ"/>
                         <outlet property="descriptionLabel" destination="hCc-ZC-Ozc" id="TJ2-d8-jJC"/>
                         <outlet property="staticWeekUpdateImage" destination="Fdn-cK-9Z7" id="IZO-qn-T01"/>
+                        <outlet property="view" destination="xlg-WQ-33S" id="lAF-BN-oz4"/>
                         <outlet property="webButton" destination="gCe-kG-9wo" id="3vs-I2-1WS"/>
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="558" y="-405"/>
+            <point key="canvasLocation" x="792" y="-344"/>
         </scene>
+        <!--Web View Controller-->
         <scene sceneID="3aG-dG-WQD">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9PP-pd-NAn" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -130,6 +141,7 @@
             </objects>
             <point key="canvasLocation" x="2120" y="-471"/>
         </scene>
+        <!--Home View Controller-->
         <scene sceneID="6MB-UH-E9c">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z8h-sw-QT1" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -138,89 +150,99 @@
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="center" image="Homepage(2nd).png" id="FC2-Na-5jk">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="budgetbarbie-bg.jpg" id="FC2-Na-5jk">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
-                            <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="4jf-iI-0GK">
-                                <rect key="frame" x="0.0" y="127" width="269" height="77"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
-                                <state key="normal" title="SPECIALS" backgroundImage="greenbutton.png">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <segue destination="knr-Xi-mxY" kind="push" id="HtW-K7-ZQs"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="2pe-vJ-hd3">
-                                <rect key="frame" x="-36" y="38" width="269" height="77"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
-                                <state key="normal" title="BUDGET PLACES" backgroundImage="redbutton.png">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <segue destination="fCP-Qo-AYZ" kind="push" id="ZaV-mu-ySj"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="kUi-03-5Qw">
-                                <rect key="frame" x="51" y="215" width="269" height="77"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
-                                <state key="normal" title="VIDEOS" backgroundImage="bluebutton.png">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <segue destination="RPI-Mb-bxT" kind="push" identifier="ShowVideos" id="TtE-gg-1AE"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="onv-kk-X3I">
-                                <rect key="frame" x="102" y="306" width="269" height="77"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
-                                <state key="normal" title="GIVEAWAY!!" backgroundImage="yellowbutton.png">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <segue destination="Uai-sP-yNZ" kind="push" id="KTR-JE-i16"/>
-                                </connections>
-                            </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="present.png" id="F3C-V5-oyi">
-                                <rect key="frame" x="114" y="319" width="52" height="53"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
-                            </imageView>
+                            <view contentMode="scaleToFill" id="hkC-5e-aHp">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <subviews>
+                                    <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="2pe-vJ-hd3">
+                                        <rect key="frame" x="-46" y="35" width="269" height="77"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="AmericanTypewriter-Bold" family="American Typewriter" pointSize="18"/>
+                                        <state key="normal" title="BUDGET PLACES" backgroundImage="purplebutton.png">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <segue destination="fCP-Qo-AYZ" kind="push" identifier="3" id="ZaV-mu-ySj"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="kUi-03-5Qw">
+                                        <rect key="frame" x="26" y="213" width="269" height="77"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                                        <fontDescription key="fontDescription" name="AmericanTypewriter-Bold" family="American Typewriter" pointSize="18"/>
+                                        <state key="normal" title="VIDEOS" backgroundImage="purplebutton.png">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <segue destination="RPI-Mb-bxT" kind="push" identifier="ShowVideos" id="TtE-gg-1AE"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="4jf-iI-0GK">
+                                        <rect key="frame" x="-14" y="124" width="269" height="77"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="AmericanTypewriter-Bold" family="American Typewriter" pointSize="18"/>
+                                        <state key="normal" title="SPECIALS" backgroundImage="purplebutton.png">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <segue destination="knr-Xi-mxY" kind="push" identifier="1" id="HtW-K7-ZQs"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="onv-kk-X3I">
+                                        <rect key="frame" x="86" y="303" width="269" height="77"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                                        <fontDescription key="fontDescription" name="AmericanTypewriter-Bold" family="American Typewriter" pointSize="18"/>
+                                        <state key="normal" title="GIVEAWAYS" backgroundImage="purplebutton.png">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <segue destination="Uai-sP-yNZ" kind="push" identifier="2" id="KTR-JE-i16"/>
+                                        </connections>
+                                    </button>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="present.png" id="F3C-V5-oyi">
+                                        <rect key="frame" x="101" y="317" width="52" height="54"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="izR-v1-pLW"/>
                     <connections>
                         <outlet property="budgetButton" destination="2pe-vJ-hd3" id="bRf-XB-Mxm"/>
+                        <outlet property="contentView" destination="hkC-5e-aHp" id="kfw-rf-1qJ"/>
                         <outlet property="giveawayButton" destination="onv-kk-X3I" id="v9a-Db-rap"/>
                         <outlet property="presentImage" destination="F3C-V5-oyi" id="fnW-Ez-Kog"/>
                         <outlet property="specialButton" destination="4jf-iI-0GK" id="twl-bU-5f3"/>
                         <outlet property="videoButton" destination="kUi-03-5Qw" id="6rc-UO-IB9"/>
+                        <outlet property="view" destination="b5P-zc-NCC" id="80B-8i-YQ7"/>
                     </connections>
                 </viewController>
             </objects>
             <point key="canvasLocation" x="1539" y="157"/>
         </scene>
+        <!--Special Home View Controller-->
         <scene sceneID="dcC-9T-o4I">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zcM-vQ-kPp" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -229,16 +251,16 @@
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="Homepage(2nd).png" id="T3k-1A-YbJ">
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="budgetbarbie-bg.jpg" id="T3k-1A-YbJ">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
-                                <autoresizingMask key="autoresizingMask"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
                             <view contentMode="scaleToFill" id="HAb-zV-JIy" customClass="iCarousel">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
-                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="Special-logo.png" id="0BZ-KY-8ub">
-                                        <rect key="frame" x="195" y="7" width="192" height="69"/>
+                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" image="Special-logo.png" id="0BZ-KY-8ub">
+                                        <rect key="frame" x="171" y="7" width="192" height="69"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                     </imageView>
                                 </subviews>
@@ -254,6 +276,7 @@
                     <navigationItem key="navigationItem" id="or8-S2-Mgk"/>
                     <connections>
                         <outlet property="carousel" destination="HAb-zV-JIy" id="sg3-cn-Dq0"/>
+                        <outlet property="specialImageView" destination="0BZ-KY-8ub" id="WdF-0j-jMU"/>
                         <outlet property="view" destination="N8w-fP-Elz" id="oth-Ax-wQ0"/>
                         <segue destination="cU2-eX-K7F" kind="push" identifier="SpecialDetails" id="bPw-k8-rZC"/>
                     </connections>
@@ -261,6 +284,7 @@
             </objects>
             <point key="canvasLocation" x="2131" y="1289"/>
         </scene>
+        <!--Giveaway View Controller-->
         <scene sceneID="kAK-tB-BTA">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zk3-pp-iOw" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -269,9 +293,9 @@
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="center" image="Homepage(2nd).png" id="887-Lz-bZ7">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="budgetbarbie-bg.jpg" id="887-Lz-bZ7">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="cOq-LR-9Ah">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
@@ -304,7 +328,7 @@
                                         <rect key="frame" x="0.0" y="179" width="320" height="76"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="10" y="1" width="280" height="75"/>
+                                            <rect key="frame" x="10" y="0.0" width="280" height="75"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="4" contentMode="left" text="Simply login &amp; leave a comment to tell us why you deserve the prize." lineBreakMode="tailTruncation" numberOfLines="2" minimumFontSize="10" id="pqK-e0-DNH">
@@ -332,7 +356,7 @@
                                         <rect key="frame" x="0.0" y="255" width="320" height="47"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="10" y="1" width="300" height="46"/>
+                                            <rect key="frame" x="10" y="0.0" width="300" height="46"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="3" contentMode="left" text="Name" lineBreakMode="tailTruncation" numberOfLines="2" minimumFontSize="10" id="Nv1-yH-bja">
@@ -370,6 +394,7 @@
             </objects>
             <point key="canvasLocation" x="2120" y="712"/>
         </scene>
+        <!--Detail View Controller-->
         <scene sceneID="vFU-kI-WTc">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="R2m-09-6pC" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -378,7 +403,7 @@
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="center" image="Homepage(2nd).png" id="dmn-cY-3Lg">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="budgetbarbie-bg.jpg" id="0ah-LY-x5b">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
@@ -387,39 +412,55 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ImageCell" rowHeight="135" id="cbP-Ti-D1P">
-                                        <rect key="frame" x="0.0" y="22" width="320" height="135"/>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ImageCell" rowHeight="149" id="cbP-Ti-D1P">
+                                        <rect key="frame" x="0.0" y="22" width="320" height="149"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="134"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="148"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" tag="8" contentMode="scaleToFill" editable="NO" text="testing" id="8Cj-Hx-4ug">
-                                                    <rect key="frame" x="10" y="10" width="156" height="107"/>
+                                                    <rect key="frame" x="10" y="10" width="156" height="119"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                 </textView>
+                                                <button opaque="NO" tag="11" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="JB9-1p-S9q">
+                                                    <rect key="frame" x="179" y="106" width="112" height="30"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" size="button"/>
+                                                    <state key="normal" image="watchnow-btn.png">
+                                                        <color key="titleColor" red="0.19607843137254902" green="0.30980392156862746" blue="0.52156862745098043" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <state key="highlighted">
+                                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                </button>
+                                                <imageView userInteractionEnabled="NO" tag="15" contentMode="scaleAspectFit" id="d1Y-Ac-SNJ">
+                                                    <rect key="frame" x="174" y="10" width="119" height="84"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="LoadMoreCell" rowHeight="44" id="TPT-N8-FEv">
-                                        <rect key="frame" x="0.0" y="157" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="171" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="How much you can buy with $100?" textAlignment="center" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" minimumFontSize="10" id="t2c-zA-Jzw">
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="How much you can buy with $100?" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="t2c-zA-Jzw">
                                                     <rect key="frame" x="16" y="0.0" width="288" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" name="AmericanTypewriter-Bold" family="American Typewriter" pointSize="16"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="7" contentMode="left" text="Tab here to find out!" textAlignment="center" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" minimumFontSize="10" id="ueP-M0-aNl">
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="7" contentMode="left" text="Tab here to find out!" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="ueP-M0-aNl">
                                                     <rect key="frame" x="16" y="22" width="288" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" name="AmericanTypewriter" family="American Typewriter" pointSize="16"/>
@@ -431,7 +472,7 @@
                                         </view>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ItemBoughtCell" rowHeight="82" id="AAR-A5-gIL">
-                                        <rect key="frame" x="0.0" y="201" width="320" height="82"/>
+                                        <rect key="frame" x="0.0" y="215" width="320" height="82"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="81"/>
@@ -441,7 +482,7 @@
                                                     <rect key="frame" x="12" y="5" width="70" height="70"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="left" text="Brown Booties" lineBreakMode="tailTruncation" numberOfLines="2" adjustsFontSizeToFit="NO" minimumFontSize="10" id="bM6-Xx-vmJ">
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="left" text="Brown Booties" lineBreakMode="tailTruncation" numberOfLines="2" minimumFontSize="10" id="bM6-Xx-vmJ">
                                                     <rect key="frame" x="90" y="49" width="150" height="32"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" name="AmericanTypewriter-Bold" family="American Typewriter" pointSize="14"/>
@@ -462,14 +503,14 @@
                                                     <color key="textColor" red="1" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="5" contentMode="left" text="$19.90" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" minimumFontSize="10" id="ovI-9G-nDK">
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="5" contentMode="left" text="$19.90" lineBreakMode="tailTruncation" minimumFontSize="10" id="ovI-9G-nDK">
                                                     <rect key="frame" x="259" y="54" width="54" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" name="AmericanTypewriter" family="American Typewriter" pointSize="14"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="@" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" minimumFontSize="10" id="zy6-Qg-pFa">
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="@" lineBreakMode="tailTruncation" minimumFontSize="10" id="zy6-Qg-pFa">
                                                     <rect key="frame" x="244" y="56" width="15" height="18"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" name="AmericanTypewriter" family="American Typewriter" pointSize="14"/>
@@ -492,11 +533,13 @@
                     <navigationItem key="navigationItem" id="Ais-mi-4wx"/>
                     <connections>
                         <outlet property="tableView" destination="iy7-ex-LaM" id="OAb-H7-nL9"/>
+                        <segue destination="RPI-Mb-bxT" kind="push" identifier="DetailToWeb" id="TYP-W6-YgW"/>
                     </connections>
                 </viewController>
             </objects>
             <point key="canvasLocation" x="2661" y="157"/>
         </scene>
+        <!--List Table View Controller-->
         <scene sceneID="Bof-Oe-Bwl">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IEx-J7-Fb3" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -505,7 +548,11 @@
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <tableView opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="67" sectionHeaderHeight="22" sectionFooterHeight="22" id="DcZ-yN-8Jf">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="budgetbarbie-bg.jpg" id="dmn-cY-3Lg">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
+                            <tableView opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="67" sectionHeaderHeight="22" sectionFooterHeight="22" id="DcZ-yN-8Jf">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -534,10 +581,10 @@
                                                     <rect key="frame" x="3" y="2" width="126" height="61"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1002" contentMode="left" text="Label" lineBreakMode="tailTruncation" numberOfLines="2" adjustsFontSizeToFit="NO" minimumFontSize="10" id="czZ-f0-yfD">
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1002" contentMode="left" text="Label" lineBreakMode="tailTruncation" numberOfLines="2" minimumFontSize="10" id="czZ-f0-yfD">
                                                     <rect key="frame" x="139" y="4" width="176" height="37"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="15"/>
+                                                    <fontDescription key="fontDescription" name="AmericanTypewriter-Bold" family="American Typewriter" pointSize="15"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -574,6 +621,7 @@
             </objects>
             <point key="canvasLocation" x="2120" y="121"/>
         </scene>
+        <!--Navigation Controller - Item 1-->
         <scene sceneID="hxa-VN-qJi">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rku-fI-1LN" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -584,7 +632,7 @@
                     <navigationBar key="navigationBar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="WcN-cQ-FBj">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="tintColor" red="0.40000000596046448" green="0.40000000596046448" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="tintColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <toolbar key="toolbar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="8ge-rj-Fah">
@@ -596,26 +644,24 @@
                     </connections>
                 </navigationController>
             </objects>
-            <point key="canvasLocation" x="1080" y="157"/>
+            <point key="canvasLocation" x="1046" y="292"/>
         </scene>
     </scenes>
     <resources>
-        <image name="Homepage(2nd).png" width="640" height="960"/>
-        <image name="Homepage_bg.png" width="640" height="960"/>
-        <image name="Special-logo.png" width="300" height="109"/>
-        <image name="ThisWeekUpdate.png" width="209" height="136"/>
+        <image name="Homepage_bg.png" width="320" height="480"/>
+        <image name="Special-logo.png" width="192" height="69"/>
+        <image name="ThisWeekUpdate.png" width="92" height="59"/>
         <image name="back-arrow.png" width="13" height="15"/>
-        <image name="bluebutton.png" width="306" height="88"/>
-        <image name="enterButton.png" width="160" height="84"/>
+        <image name="budgetbarbie-bg.jpg" width="320" height="460"/>
+        <image name="enterButton.png" width="108" height="55"/>
         <image name="facebooklikebutton.png" width="80" height="74"/>
         <image name="forward-arrow.png" width="13" height="15"/>
         <image name="glossyButton-disabled.png" width="58" height="33"/>
         <image name="glossyButton-highlighted.png" width="58" height="33"/>
         <image name="glossyButton-normal.png" width="58" height="33"/>
-        <image name="greenbutton.png" width="306" height="88"/>
-        <image name="present.png" width="297" height="307"/>
-        <image name="redbutton.png" width="306" height="88"/>
-        <image name="yellowbutton.png" width="306" height="88"/>
+        <image name="present.png" width="52" height="54"/>
+        <image name="purplebutton.png" width="269" height="77"/>
+        <image name="watchnow-btn.png" width="112" height="30"/>
     </resources>
     <classes>
         <class className="CustomTitleViewController" superclassName="UIViewController">
@@ -637,13 +683,14 @@
             <source key="sourceIdentifier" type="project" relativePath="./Classes/HomeViewController.h"/>
             <relationships>
                 <relationship kind="outlet" name="budgetButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="contentView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="giveawayButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="presentImage" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="specialButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="videoButton" candidateClass="UIButton"/>
             </relationships>
         </class>
-        <class className="ListTableViewController" superclassName="UIViewController">
+        <class className="ListTableViewController" superclassName="CustomTitleViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ListTableViewController.h"/>
             <relationships>
                 <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
@@ -653,11 +700,13 @@
             <source key="sourceIdentifier" type="project" relativePath="./Classes/SpecialHomeViewController.h"/>
             <relationships>
                 <relationship kind="outlet" name="carousel" candidateClass="iCarousel"/>
+                <relationship kind="outlet" name="specialImageView" candidateClass="UIImageView"/>
             </relationships>
         </class>
         <class className="StartUpViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/StartUpViewController.h"/>
             <relationships>
+                <relationship kind="outlet" name="contentView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="descriptionLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="staticWeekUpdateImage" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="webButton" candidateClass="UIButton"/>

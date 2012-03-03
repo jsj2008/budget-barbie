@@ -20,6 +20,7 @@
 }
 
 @synthesize carousel = _carousel;
+@synthesize specialImageView;
 
 #pragma mark - View lifecycle}
 
@@ -59,8 +60,14 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.carousel.type = iCarouselTypeCylinder;
+    self.carousel.type = iCarouselTypeRotary;
     [self setUp];
+    
+    if ([UIApplication sharedApplication].statusBarOrientation == UIDeviceOrientationLandscapeLeft || [UIApplication sharedApplication].statusBarOrientation == UIDeviceOrientationLandscapeRight) {
+        self.specialImageView.hidden = YES;
+    } else {
+        self.specialImageView.hidden = NO;
+    }
 }
 
 - (NSUInteger)numberOfItemsInCarousel:(iCarousel *)carousel
@@ -130,14 +137,24 @@
 
 - (void)viewDidUnload
 {
+    [self setSpecialImageView:nil];
     [super viewDidUnload];
     self.carousel = nil;
+}
+
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+    if (UIInterfaceOrientationIsLandscape(toInterfaceOrientation)) {
+        self.specialImageView.hidden = YES;
+    } else 
+        self.specialImageView.hidden = NO;
+
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+    return YES;
 }
 
 @end

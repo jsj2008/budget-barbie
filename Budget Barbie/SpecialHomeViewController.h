@@ -12,5 +12,6 @@
 @interface SpecialHomeViewController : CustomTitleViewController <iCarouselDelegate, iCarouselDataSource>
 
 @property (nonatomic, weak) IBOutlet iCarousel *carousel;
+@property (weak, nonatomic) IBOutlet UIImageView *specialImageView;
 
 @end

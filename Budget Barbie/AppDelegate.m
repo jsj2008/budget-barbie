@@ -7,8 +7,13 @@
 //
 
 #import "AppDelegate.h"
+#import "UAirship.h"
+#import "UAPush.h"
+
+
 
 @implementation AppDelegate
+
 
 @synthesize window = _window;
 
@@ -31,14 +36,64 @@
     
     [[UIBarButtonItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor blackColor], UITextAttributeTextColor, [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0], UITextAttributeTextShadowColor, [NSValue valueWithUIOffset:UIOffsetMake(0, 1)], UITextAttributeTextShadowOffset, [UIFont fontWithName:@"Helvetica-Bold" size:0.0], UITextAttributeFont, nil] forState:UIControlStateNormal];
 
+    [[UINavigationBar appearance]setBackgroundImage:[UIImage imageNamed:@"navbar_bg"] forBarMetrics:UIBarMetricsDefault];
+    [[UINavigationBar appearance]setBackgroundImage:[UIImage imageNamed:@"navbar_bg(landscape)"] forBarMetrics:UIBarMetricsLandscapePhone];
+
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
     [self customizeAppearance];
+   // [self failIfSimulator];
+    
+    //Init Airship launch options
+    NSMutableDictionary *takeOffOptions = [[NSMutableDictionary alloc] init];
+    [takeOffOptions setValue:launchOptions forKey:UAirshipTakeOffOptionsLaunchOptionsKey];
+    
+    // Create Airship singleton that's used to talk to Urban Airhship servers.
+    // Please populate AirshipConfig.plist with your info from http://go.urbanairship.com
+    [UAirship takeOff:takeOffOptions];
+    
+    [[UAPush shared] resetBadge];//zero badge on startup
+    
+    [[UAPush shared] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge |
+                                                         UIRemoteNotificationTypeSound |
+                                                         UIRemoteNotificationTypeAlert)];
+    
     
     return YES;
+}
+
+
+-(void)applicationDidBecomeActive:(UIApplication *)application
+{
+    UALOG(@"Application did become active.");
+    [[UAPush shared] resetBadge]; //zero badge when resuming from background (iOS 4+)
+}
+
+-(void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
+{
+    UALOG(@"APN device token: %@", deviceToken);
+    // Updates the device token and registers the token with UA
+    [[UAPush shared] registerDeviceToken:deviceToken];
+}
+
+- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *) error {
+    UALOG(@"Failed To Register For Remote Notifications With Error: %@", error);
+}
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+    UALOG(@"Received remote notification: %@", userInfo);
+    
+    // Get application state for iOS4.x+ devices, otherwise assume active
+    UIApplicationState appState = UIApplicationStateActive;
+    if ([application respondsToSelector:@selector(applicationState)]) {
+        appState = application.applicationState;
+    }
+    
+    [[UAPush shared] handleNotification:userInfo applicationState:appState];
+    [[UAPush shared] resetBadge]; // zero badge after push received
 }
 							
 - (void)applicationWillResignActive:(UIApplication *)application
@@ -64,20 +119,22 @@
      */
 }
 
-- (void)applicationDidBecomeActive:(UIApplication *)application
-{
-    /*
-     Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-     */
-}
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
-    /*
-     Called when the application is about to terminate.
-     Save data if appropriate.
-     See also applicationDidEnterBackground:.
-     */
+    [UAirship land];
+}
+
+- (void)failIfSimulator {
+    if ([[[UIDevice currentDevice] model] compare:@"iPhone Simulator"] == NSOrderedSame) {
+        UIAlertView *someError = [[UIAlertView alloc] initWithTitle:@"Notice"
+                                                            message:@"You will not be able to recieve push notifications in the simulator."
+                                                           delegate:self
+                                                  cancelButtonTitle:@"OK"
+                                                  otherButtonTitles:nil];
+        
+        [someError show];
+    }
 }
 
 @end

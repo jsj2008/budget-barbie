@@ -17,13 +17,50 @@
 {
     NSString *webUrlstring;
     SystemSoundID soundID;
+ //   ADBannerView *_bannerView;
 }
 
 
 @synthesize descriptionLabel = _descriptionLabel;
 @synthesize webButton = _webButton;
+@synthesize contentView = _contentView;
 @synthesize staticWeekUpdateImage = _staticWeekUpdateImage;
 
+- (id)initWithCoder:(NSCoder *)coder
+{
+    self = [super initWithCoder:coder];
+    if (self) {
+     //   _bannerView = [[ADBannerView alloc]initWithCoder:coder];
+       // _bannerView.delegate = self;
+    }
+    return self;
+}
+
+/*
+- (void)layoutAnimated:(BOOL)animated
+{
+    if (UIInterfaceOrientationIsPortrait(self.interfaceOrientation)) {
+      _bannerView.currentContentSizeIdentifier = ADBannerContentSizeIdentifierPortrait;
+    } else {
+        _bannerView.currentContentSizeIdentifier = ADBannerContentSizeIdentifierLandscape;
+    }
+    
+    CGRect contentFrame = self.view.bounds;
+    CGRect bannerFrame = _bannerView.frame;
+    if (_bannerView.bannerLoaded) {
+        contentFrame.size.height -= _bannerView.frame.size.height;
+        bannerFrame.origin.y = contentFrame.size.height;
+    } else {
+        bannerFrame.origin.y = contentFrame.size.height;
+    }
+    
+    [UIView animateWithDuration:animated ? 0.25 : 0.0 animations:^{
+        _contentView.frame = contentFrame;
+        [_contentView layoutIfNeeded];
+        _bannerView.frame = bannerFrame;
+    }];
+}
+*/
 
 - (void)loadSoundEffect
 {
@@ -116,11 +153,30 @@
 -(void)viewDidLoad
 {
     [super viewDidLoad];
+ //   [self.view addSubview:_bannerView];
+    
     [self loadSoundEffect];
     self.staticWeekUpdateImage.alpha = 0.0;
 
     [self fetchSplashScreenInfo];
 }
+
+/*
+-(void)viewDidAppear:(BOOL)animated
+{
+ //   [self layoutAnimated:NO];
+}
+
+- (void)bannerViewDidLoadAd:(ADBannerView *)banner
+{
+  //  [self layoutAnimated:YES];
+}
+
+- (void)bannerView:(ADBannerView *)banner didFailToReceiveAdWithError:(NSError *)error
+{
+  //  [self layoutAnimated:YES];
+}
+*/
 
 
 - (void)viewDidUnload {
@@ -128,6 +184,7 @@
     [self setDescriptionLabel:nil];
     [self setWebButton:nil];
     [self setStaticWeekUpdateImage:nil];
+    [self setContentView:nil];
     [super viewDidUnload];
 }
 

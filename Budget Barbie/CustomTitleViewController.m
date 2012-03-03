@@ -13,7 +13,8 @@
 - (id)initWithCoder:(NSCoder *)coder {
     self = [super initWithCoder:coder];
     if (self) {
-        [[self navigationItem]setTitleView:[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"titleView.png"]]];
+        UIImageView *imageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"titleView.png"]];
+        [[self navigationItem]setTitleView:imageView];
     }
     return self;
 }

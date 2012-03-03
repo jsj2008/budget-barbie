@@ -8,9 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "CustomTitleViewController.h"
+#import "AppDelegate.h"
 
-@interface HomeViewController : CustomTitleViewController 
+@interface HomeViewController : CustomTitleViewController
 
+@property (nonatomic, weak) IBOutlet UIView *contentView;
 @property (weak, nonatomic) IBOutlet UIButton *budgetButton;
 @property (weak, nonatomic) IBOutlet UIButton *specialButton;
 @property (weak, nonatomic) IBOutlet UIButton *videoButton;

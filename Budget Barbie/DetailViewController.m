@@ -15,7 +15,7 @@
 #import "ItemBought.h"
 #import "ImageDetailViewController.h"
 #import "SpecialItem.h"
-#import "YouTubeView.h"
+#import "WebViewController.h"
 
 @interface DetailViewController()
 
@@ -94,42 +94,65 @@
     [queue addOperation:operation];
 }
 
--(void)loadPlaceImage:(UITableViewCell *)cell
+
+
+-(void)loadFirstCell:(UITableViewCell *)cell
 {
-
+    UIButton *videoButton = (UIButton *)[cell viewWithTag:11];
+    [videoButton addTarget:self action:@selector(launchWebVC) forControlEvents:UIControlEventTouchUpInside];
+    
     if (self.placeObject) {
-        NSString *videoURL = self.placeObject.videoURL;
-        self.youtubeView = [[YouTubeView alloc]initWithStringAsURL:videoURL frame:CGRectMake(180, 10, 128, 107)];
-        [cell addSubview:self.youtubeView];
-        self.youtubeView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleBottomMargin;
-
+        UIImageView *imageView = (UIImageView *)[cell viewWithTag:15];
+        [imageView setImageWithURL:[NSURL URLWithString:self.placeObject.imageURL] placeholderImage:[UIImage imageNamed:@"Placeholder"]];
         
         UITextView *description = (UITextView *)[cell viewWithTag:8];
         description.text = self.placeObject.description;
-    } else {
-        NSString *videoURL = self.specialItem.videoURL;
-        self.youtubeView = [[YouTubeView alloc]initWithStringAsURL:videoURL frame:CGRectMake(180, 10, 128, 107)];
-
-        [cell addSubview:self.youtubeView];
-        self.youtubeView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleBottomMargin;
-
+    }
+    else 
+    {
+        UIImageView *imageView = (UIImageView *)[cell viewWithTag:15];
+        [imageView setImageWithURL:[NSURL URLWithString:self.specialItem.imageURL] placeholderImage:[UIImage imageNamed:@"Placeholder"]];
 
         UITextView *description = (UITextView *)[cell viewWithTag:8];
         description.text = self.specialItem.description;
     }
 }
 
+-(void)launchWebVC
+{
+    if (self.placeObject) {
+        [self performSegueWithIdentifier:@"DetailToWeb" sender:self.placeObject.videoURL];
+    } else {
+        [self performSegueWithIdentifier:@"DetailToWeb" sender:self.specialItem.videoURL];
+    }
+}
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"DetailToWeb"]) {
+        [segue.destinationViewController setUrlString:sender];
+    }
+}
+
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-        
+    
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
+    label.backgroundColor = [UIColor clearColor];
+    label.font = [UIFont boldSystemFontOfSize:20.0];
+    label.shadowColor = [UIColor colorWithWhite:0.0 alpha:0.5];
+    label.textAlignment = UITextAlignmentCenter;
+    label.textColor = [UIColor blackColor]; // change this color
+    self.navigationItem.titleView = label;
     if (self.placeObject) {
-        self.title = self.placeObject.name;
+        label.text = self.placeObject.name;
         [self fetchShopsListing];
     } else {
-        self.title = self.specialItem.title;
+        label.text = self.specialItem.title;
         [self fetchSpecialListing];
     }
+    [label sizeToFit];
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.labelText = @"Loading now...";
 }
@@ -152,7 +175,7 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.row == 0)
-        return 135.0;
+        return 149.0;
     else if (indexPath.row == 1)
         return 44.0;
     else
@@ -177,7 +200,7 @@
         if (!loaded) {
             loaded = YES;
             UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier1];
-            [self loadPlaceImage:cell];
+            [self loadFirstCell:cell];
             return cell;
         }
         else {

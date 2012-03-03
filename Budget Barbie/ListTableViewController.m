@@ -7,7 +7,6 @@
 //
 
 #import "ListTableViewController.h"
-#import "UIImageView+WebCache.h"
 #import <QuartzCore/QuartzCore.h>
 #import "DetailViewController.h"
 #import "MBProgressHUD.h"
@@ -16,6 +15,7 @@
 #import "Place.h"
 #import "UIDevice+IdentifierAddition.h"
 #import "MyConstants.h"
+#import "UIImageView+WebCache.h"
 
 @implementation ListTableViewController
 {
@@ -109,7 +109,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [[self navigationItem]setTitleView:[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"titleView.png"]]];
     [self fetchData];
 }
 
@@ -163,9 +162,9 @@
 
     [imageView setImageWithURL:[NSURL URLWithString:place.imageURL] placeholderImage:[UIImage imageNamed:@"Placeholder.png"]];
     
-    UIImageView *backgroundView = [[UIImageView alloc]initWithFrame:[cell frame]];
-    [backgroundView setImage:[UIImage imageNamed:@"backgroundCell.png"]];
-    cell.backgroundView = backgroundView;
+  //  UIImageView *backgroundView = [[UIImageView alloc]initWithFrame:[cell frame]];
+  //  [backgroundView setImage:[UIImage imageNamed:@"backgroundCell.png"]];
+   // cell.backgroundView = backgroundView;
     
     return cell;
 }
