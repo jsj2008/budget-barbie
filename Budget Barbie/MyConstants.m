@@ -20,5 +20,7 @@ NSString * const kHostPathForGiveawayItems = @"giveaway_items.php";
 NSString * const kHostPathForGiveawayWinners = @"winners.php";
 NSString * const kHostPathForSpecialMain = @"special_main.php";
 NSString * const kHostPathForSpecialDetails = @"special_details.php";
+NSString * const MY_BANNER_UNIT_ID = @"a14f5a9e60d0d59";
+NSString * const TEST_DEVICE_ID = @"c54d66b4f445a38422e2442694641955f830babc";
 
 @end

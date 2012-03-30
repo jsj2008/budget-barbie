@@ -60,6 +60,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     self.carousel.type = iCarouselTypeRotary;
     [self setUp];
     

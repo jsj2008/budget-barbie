@@ -8,16 +8,19 @@
 
 #import "StartUpViewController.h"
 #import "WebViewController.h"
+#import "GADBannerView.h"
 #import <AudioToolbox/AudioToolbox.h>
 #import "MBProgressHUD.h"
 #import "MyConstants.h"
 #import "AFJSONRequestOperation.h"
+#import "SplashScreen.h"
 
 @implementation StartUpViewController
 {
     NSString *webUrlstring;
     SystemSoundID soundID;
- //   ADBannerView *_bannerView;
+
+    GADBannerView *bannerView_;
 }
 
 
@@ -26,41 +29,6 @@
 @synthesize contentView = _contentView;
 @synthesize staticWeekUpdateImage = _staticWeekUpdateImage;
 
-- (id)initWithCoder:(NSCoder *)coder
-{
-    self = [super initWithCoder:coder];
-    if (self) {
-     //   _bannerView = [[ADBannerView alloc]initWithCoder:coder];
-       // _bannerView.delegate = self;
-    }
-    return self;
-}
-
-/*
-- (void)layoutAnimated:(BOOL)animated
-{
-    if (UIInterfaceOrientationIsPortrait(self.interfaceOrientation)) {
-      _bannerView.currentContentSizeIdentifier = ADBannerContentSizeIdentifierPortrait;
-    } else {
-        _bannerView.currentContentSizeIdentifier = ADBannerContentSizeIdentifierLandscape;
-    }
-    
-    CGRect contentFrame = self.view.bounds;
-    CGRect bannerFrame = _bannerView.frame;
-    if (_bannerView.bannerLoaded) {
-        contentFrame.size.height -= _bannerView.frame.size.height;
-        bannerFrame.origin.y = contentFrame.size.height;
-    } else {
-        bannerFrame.origin.y = contentFrame.size.height;
-    }
-    
-    [UIView animateWithDuration:animated ? 0.25 : 0.0 animations:^{
-        _contentView.frame = contentFrame;
-        [_contentView layoutIfNeeded];
-        _bannerView.frame = bannerFrame;
-    }];
-}
-*/
 
 - (void)loadSoundEffect
 {
@@ -125,6 +93,15 @@
     hud.labelText = @"Retrieving";
     hud.detailsLabelText = @"Updates";
     
+    [SplashScreen getSplashScreenInfoWithBlock:^(NSArray *info) {
+        SplashScreen *splashScreen = [info objectAtIndex:0];
+        webUrlstring = splashScreen.videoURLString;
+        self.descriptionLabel.text = splashScreen.description;
+        [self loadImage:splashScreen.imageURL];
+        
+    }];
+    
+    /*
     NSString *urlString = [NSString stringWithFormat:@"%@%@%@",kHostName,kHostMainDirectory,kHostPathForSplashScreen];
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:urlString]];
     
@@ -142,7 +119,7 @@
                                              }];
     NSOperationQueue *queue = [[NSOperationQueue alloc]init];
     [queue addOperation:operation];
-
+*/
 }
 
 - (IBAction)enterClicked:(id)sender 
@@ -153,7 +130,24 @@
 -(void)viewDidLoad
 {
     [super viewDidLoad];
- //   [self.view addSubview:_bannerView];
+    
+    bannerView_ = [[GADBannerView alloc]
+                   initWithFrame:CGRectMake(0.0,
+                                            self.view.frame.size.height -
+                                            GAD_SIZE_320x50.height,
+                                            GAD_SIZE_320x50.width,
+                                            GAD_SIZE_320x50.height)];
+    
+    // Specify the ad's "unit identifier." This is your AdMob Publisher ID.
+    bannerView_.adUnitID = MY_BANNER_UNIT_ID;
+    
+    // Let the runtime know which UIViewController to restore after taking
+    // the user wherever the ad goes and add it to the view hierarchy.
+    bannerView_.rootViewController = self;
+    [self.view addSubview:bannerView_];
+    
+    // Initiate a generic request to load it with an ad.
+    [bannerView_ loadRequest:[GADRequest request]];
     
     [self loadSoundEffect];
     self.staticWeekUpdateImage.alpha = 0.0;
@@ -161,22 +155,6 @@
     [self fetchSplashScreenInfo];
 }
 
-/*
--(void)viewDidAppear:(BOOL)animated
-{
- //   [self layoutAnimated:NO];
-}
-
-- (void)bannerViewDidLoadAd:(ADBannerView *)banner
-{
-  //  [self layoutAnimated:YES];
-}
-
-- (void)bannerView:(ADBannerView *)banner didFailToReceiveAdWithError:(NSError *)error
-{
-  //  [self layoutAnimated:YES];
-}
-*/
 
 
 - (void)viewDidUnload {

@@ -17,4 +17,8 @@
 @property (nonatomic, copy) NSString *likes;
 @property (nonatomic, copy) NSString *videoURL;
 
++(void)getBudgetPlacesWithBlock:(void(^)(NSArray *budgetPlaces))block;
+
++(void)postLikesWithBlock:(void(^)(NSString *likes))block withSelectedPlace:(NSString *)placeID;
+
 @end

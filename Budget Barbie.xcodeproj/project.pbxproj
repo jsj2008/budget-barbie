@@ -124,8 +124,11 @@
 		8438021D14CA60CC00F54BBC /* button_textured_24.png in Resources */ = {isa = PBXBuildFile; fileRef = 8438021914CA60CC00F54BBC /* button_textured_24.png */; };
 		8438021E14CA60CC00F54BBC /* button_textured_30.png in Resources */ = {isa = PBXBuildFile; fileRef = 8438021A14CA60CC00F54BBC /* button_textured_30.png */; };
 		8438CCB514DFDEBE00594332 /* ItemBought.m in Sources */ = {isa = PBXBuildFile; fileRef = 8438CCB414DFDEBD00594332 /* ItemBought.m */; };
+		8443AE27151B56DB00F93106 /* SplashScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 8443AE26151B56DB00F93106 /* SplashScreen.m */; };
+		8443AE2A151B593200F93106 /* AFBudgetBarbieAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 8443AE29151B593200F93106 /* AFBudgetBarbieAPIClient.m */; };
 		844A9DCF14F7AF8D009E3084 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84EEF8FE14E9FBCA00634D00 /* iAd.framework */; };
 		844BFA3414E8C689000E5967 /* YouTubeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 844BFA3314E8C689000E5967 /* YouTubeView.m */; };
+		844C6F82150AD63D00B5079A /* libGoogleAdMobAds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 844C6F81150AD63D00B5079A /* libGoogleAdMobAds.a */; };
 		845468D214F6652000904FD1 /* navbar_bg(landscape).png in Resources */ = {isa = PBXBuildFile; fileRef = 845468D014F6652000904FD1 /* navbar_bg(landscape).png */; };
 		845468D314F6652000904FD1 /* navbar_bg(landscape)@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 845468D114F6652000904FD1 /* navbar_bg(landscape)@2x.png */; };
 		845468D514F6672F00904FD1 /* watchnow-btn.png in Resources */ = {isa = PBXBuildFile; fileRef = 845468D414F6672F00904FD1 /* watchnow-btn.png */; };
@@ -614,9 +617,20 @@
 		8438021A14CA60CC00F54BBC /* button_textured_30.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_textured_30.png; sourceTree = "<group>"; };
 		8438CCB314DFDEBD00594332 /* ItemBought.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemBought.h; sourceTree = "<group>"; };
 		8438CCB414DFDEBD00594332 /* ItemBought.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemBought.m; sourceTree = "<group>"; };
+		8443AE25151B56DB00F93106 /* SplashScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SplashScreen.h; sourceTree = "<group>"; };
+		8443AE26151B56DB00F93106 /* SplashScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SplashScreen.m; sourceTree = "<group>"; };
+		8443AE28151B593200F93106 /* AFBudgetBarbieAPIClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFBudgetBarbieAPIClient.h; sourceTree = "<group>"; };
+		8443AE29151B593200F93106 /* AFBudgetBarbieAPIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFBudgetBarbieAPIClient.m; sourceTree = "<group>"; };
 		8447189E14EAAAE5002F6D6F /* SDWebImage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SDWebImage.xcodeproj; path = ../SDWebImage/SDWebImage.xcodeproj; sourceTree = "<group>"; };
 		844BFA3214E8C689000E5967 /* YouTubeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YouTubeView.h; sourceTree = "<group>"; };
 		844BFA3314E8C689000E5967 /* YouTubeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YouTubeView.m; sourceTree = "<group>"; };
+		844C6F7B150AD63D00B5079A /* GADBannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADBannerView.h; sourceTree = "<group>"; };
+		844C6F7C150AD63D00B5079A /* GADBannerViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADBannerViewDelegate.h; sourceTree = "<group>"; };
+		844C6F7D150AD63D00B5079A /* GADInterstitial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADInterstitial.h; sourceTree = "<group>"; };
+		844C6F7E150AD63D00B5079A /* GADInterstitialDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADInterstitialDelegate.h; sourceTree = "<group>"; };
+		844C6F7F150AD63D00B5079A /* GADRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADRequest.h; sourceTree = "<group>"; };
+		844C6F80150AD63D00B5079A /* GADRequestError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADRequestError.h; sourceTree = "<group>"; };
+		844C6F81150AD63D00B5079A /* libGoogleAdMobAds.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAdMobAds.a; sourceTree = "<group>"; };
 		845468D014F6652000904FD1 /* navbar_bg(landscape).png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "navbar_bg(landscape).png"; sourceTree = "<group>"; };
 		845468D114F6652000904FD1 /* navbar_bg(landscape)@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "navbar_bg(landscape)@2x.png"; sourceTree = "<group>"; };
 		845468D414F6672F00904FD1 /* watchnow-btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "watchnow-btn.png"; sourceTree = "<group>"; };
@@ -749,6 +763,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84C9FF5D14C91F6B0018FFA0 /* CoreGraphics.framework in Frameworks */,
 				844A9DCF14F7AF8D009E3084 /* iAd.framework in Frameworks */,
 				8406F67014F73793008A546A /* MessageUI.framework in Frameworks */,
 				8406F66E14F73748008A546A /* StoreKit.framework in Frameworks */,
@@ -759,7 +774,6 @@
 				8406F66414F73712008A546A /* CFNetwork.framework in Frameworks */,
 				8406F66314F73708008A546A /* MobileCoreServices.framework in Frameworks */,
 				842510AF14C922ED007CE27F /* Security.framework in Frameworks */,
-				84C9FF5D14C91F6B0018FFA0 /* CoreGraphics.framework in Frameworks */,
 				3201088596B4756681693705 /* libThree20UICommon.a in Frameworks */,
 				320D7DCCE32703ACAB9A45E5 /* libThree20.a in Frameworks */,
 				320A737074758E53BA54BE95 /* libThree20UINavigator.a in Frameworks */,
@@ -772,6 +786,7 @@
 				84C9FF5914C91F6B0018FFA0 /* UIKit.framework in Frameworks */,
 				84C9FF5B14C91F6B0018FFA0 /* Foundation.framework in Frameworks */,
 				8406F5F414F72CA8008A546A /* libUAirship-1.1.4.a in Frameworks */,
+				844C6F82150AD63D00B5079A /* libGoogleAdMobAds.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1443,6 +1458,20 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		844C6F7A150AD63D00B5079A /* AdMod */ = {
+			isa = PBXGroup;
+			children = (
+				844C6F7B150AD63D00B5079A /* GADBannerView.h */,
+				844C6F7C150AD63D00B5079A /* GADBannerViewDelegate.h */,
+				844C6F7D150AD63D00B5079A /* GADInterstitial.h */,
+				844C6F7E150AD63D00B5079A /* GADInterstitialDelegate.h */,
+				844C6F7F150AD63D00B5079A /* GADRequest.h */,
+				844C6F80150AD63D00B5079A /* GADRequestError.h */,
+				844C6F81150AD63D00B5079A /* libGoogleAdMobAds.a */,
+			);
+			path = AdMod;
+			sourceTree = "<group>";
+		};
 		84C9FF4914C91F6B0018FFA0 = {
 			isa = PBXGroup;
 			children = (
@@ -1494,6 +1523,7 @@
 		84C9FF5E14C91F6B0018FFA0 /* Budget Barbie */ = {
 			isa = PBXGroup;
 			children = (
+				844C6F7A150AD63D00B5079A /* AdMod */,
 				8406F4FB14F72CA8008A546A /* Airship */,
 				84CF4E0F14F0977A00F4995F /* SDWebImage */,
 				84D3B7D314E7467200939DAF /* iCarousel */,
@@ -1505,6 +1535,8 @@
 				84D6689C14E40A91009FCD92 /* Objects */,
 				84C9FF6714C91F6B0018FFA0 /* AppDelegate.h */,
 				84C9FF6814C91F6B0018FFA0 /* AppDelegate.m */,
+				8443AE28151B593200F93106 /* AFBudgetBarbieAPIClient.h */,
+				8443AE29151B593200F93106 /* AFBudgetBarbieAPIClient.m */,
 				84677F6614E37C340037A2AD /* MyConstants.h */,
 				84677F6714E37C340037A2AD /* MyConstants.m */,
 				84C4F06414CA5D9600B9A1BC /* CustomTitleViewController.h */,
@@ -1624,6 +1656,8 @@
 			children = (
 				844BFA3214E8C689000E5967 /* YouTubeView.h */,
 				844BFA3314E8C689000E5967 /* YouTubeView.m */,
+				8443AE25151B56DB00F93106 /* SplashScreen.h */,
+				8443AE26151B56DB00F93106 /* SplashScreen.m */,
 				84D95C1914DEC307000D535D /* Place.h */,
 				84D95C1A14DEC307000D535D /* Place.m */,
 				8438CCB314DFDEBD00594332 /* ItemBought.h */,
@@ -2026,6 +2060,8 @@
 				8406F64214F72CA8008A546A /* UASubscriptionTableViewDelegate.m in Sources */,
 				8406F64314F72CA8008A546A /* UASubscriptionUI.m in Sources */,
 				8406F64414F72CA8008A546A /* UASubscriptionUIUtil.m in Sources */,
+				8443AE27151B56DB00F93106 /* SplashScreen.m in Sources */,
+				8443AE2A151B593200F93106 /* AFBudgetBarbieAPIClient.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2131,6 +2167,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Budget Barbie/Airship\"",
+					"\"$(SRCROOT)/Budget Barbie/AdMod\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "EE04BDD5-59EA-45BC-A1A4-0F4D3B0E00C9";
@@ -2212,6 +2249,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Budget Barbie/Airship\"",
+					"\"$(SRCROOT)/Budget Barbie/AdMod\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "1AA622DF-87FA-4FE5-86EB-F04F8B3D2976";
@@ -2238,6 +2276,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Budget Barbie/Airship\"",
+					"\"$(SRCROOT)/Budget Barbie/AdMod\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "3717C21E-C79B-4736-9B64-D67EDFAAC239";

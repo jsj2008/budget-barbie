@@ -20,5 +20,7 @@ extern NSString * const kHostPathForGiveawayItems;
 extern NSString * const kHostPathForGiveawayWinners;
 extern NSString * const kHostPathForSpecialMain;
 extern NSString * const kHostPathForSpecialDetails;
+extern NSString * const MY_BANNER_UNIT_ID;
+extern NSString * const TEST_DEVICE_ID;
 
 @end

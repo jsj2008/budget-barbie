@@ -184,7 +184,7 @@
         if (indexPath.row < [giveawayItems count])
             return 132.0;
         else
-            return 76.0;
+            return 116.0;
     }
     else
     {

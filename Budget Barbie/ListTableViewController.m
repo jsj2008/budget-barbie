@@ -16,10 +16,11 @@
 #import "UIDevice+IdentifierAddition.h"
 #import "MyConstants.h"
 #import "UIImageView+WebCache.h"
+#import "AFNetworkActivityIndicatorManager.h"
 
 @implementation ListTableViewController
 {
-    NSMutableArray *places;
+    NSArray *places;
 }
 
 @synthesize tableView = _tableView;
@@ -30,6 +31,14 @@
 {
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
     hud.labelText = @"Loading...";
+    
+    [[AFNetworkActivityIndicatorManager sharedManager]setEnabled:YES];
+    [Place getBudgetPlacesWithBlock:^(NSArray *budgetPlaces) {
+        places = budgetPlaces;
+        [self.tableView reloadData];
+        [hud hide:YES];
+    }];
+    /*
     places = [[NSMutableArray alloc]initWithCapacity:10];
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@",kHostName,kHostMainDirectory,kHostPathForGetPlaces]];
     NSURLRequest *request= [NSURLRequest requestWithURL:url];
@@ -56,6 +65,7 @@
     
     NSOperationQueue *queue = [[NSOperationQueue alloc]init];
     [queue addOperation:operation];
+     */
 }
 
 -(void) loadAlertView:(NSString *)alertMsg
@@ -70,12 +80,26 @@
 
 -(void)likeRequest:(int)placeId
 {
-	NSString *deviceUDID = [[UIDevice currentDevice] uniqueGlobalDeviceIdentifier];
     NSString *placeIdString = [NSString stringWithFormat:@"%d",placeId];
     
+    [Place postLikesWithBlock:^(NSString *likes) {
+        for (Place *place in places) {
+            if ([place.placeId intValue] == placeId) {
+                place.likes = likes;
+                NSLog(@"Likes:%@",place.likes);
+                int reloadRowIndex = [places indexOfObject:place];
+                NSArray *indexPaths = [NSArray arrayWithObject:[NSIndexPath indexPathForRow:reloadRowIndex inSection:0]];
+                [self.tableView beginUpdates];
+                [self.tableView reloadRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationFade];
+                [self.tableView endUpdates];
+            }
+        }
+    } withSelectedPlace:placeIdString];
+        /*
     NSURL *url = [NSURL URLWithString:@"http://122.248.252.119/"];
     AFHTTPClient *httpClient = [[AFHTTPClient alloc]initWithBaseURL:url];
     
+
     NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
                             placeIdString, @"places_id",
                             deviceUDID, @"device_id",
@@ -102,7 +126,7 @@
                                          }];
     NSOperationQueue *queue = [[NSOperationQueue alloc]init];
     [queue addOperation:operation];
-
+*/
     
 }
 
